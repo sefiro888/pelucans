@@ -25,7 +25,15 @@ El usuario todavía no tiene feed de Behold. La sincronización real queda pendi
 Los vídeos de clientes son escenas del salón. Los mismos cuatro reels pueden reutilizarse en varias fichas; no se presentarán como demostraciones de una técnica que el vídeo no muestra.
 
 ## Publicación
-- [ ] Publicar la versión completa en el repositorio público sefiro888/pelucans.
-- [ ] Comprobar GitHub Pages, imágenes y MP4 en el enlace público.
+- [x] Publicar la versión completa en el repositorio público sefiro888/pelucans.
+- [x] Comprobar GitHub Pages, imágenes y MP4 en el enlace público.
 
 La parte de implementación del muro está terminada; su activación real depende de la URL de Behold que el usuario aún no tiene.
+
+## Resultado comprobado en público
+- Repositorio público: https://github.com/sefiro888/pelucans
+- Web: https://sefiro888.github.io/pelucans/
+- 38 páginas públicas ES/GL actualizadas (más 404 en cada idioma).
+- 103 recursos públicos con respuesta HTTP 200.
+- Foto principal cargada y vídeo MP4 reproducido hasta sus 27 segundos desde GitHub Pages.
+- La sincronización de Behold es la única activación externa pendiente; el usuario aún no tiene feed.

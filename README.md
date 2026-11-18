@@ -62,3 +62,7 @@ Se mantiene una redacción prudente para piel y ozono: el cuidado cosmético no 
 - Recursos y anclas verificados en ES y GL. Traducciones nuevas sin textos pendientes.
 
 El detalle de la solicitud y su estado se conserva en `MEJORAS-PENDIENTES.md`.
+
+## Publicación verificada
+
+Repositorio público: https://github.com/sefiro888/pelucans. GitHub Pages sirve desde `main`, raíz `/`. Se han comprobado 38 páginas públicas actualizadas y 103 recursos (imágenes, vídeos, CSS y JavaScript) con respuesta HTTP 200. El vídeo de corte a tijera se ha reproducido completo desde el enlace público.
