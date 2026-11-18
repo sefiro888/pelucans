@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://sefiro888.github.io/pelucans/sitemap.xml

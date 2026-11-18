@@ -23,7 +23,7 @@ INSTAGRAM_FEED_URL = ''
 SHOW_DEMO_PAIRS = False
 MIN_PAIRS = 4
 # Dirección pública de la web (con barra final), p. ej. 'https://www.pelucans.es/'. Vacío = no se generan canonical ni sitemap.
-SITE_URL = ''
+SITE_URL = 'https://sefiro888.github.io/pelucans/'
 CUR = {'file': 'index.html'}
 HEAD_SCRIPT = "<script>(function(){try{var t=localStorage.getItem('pel-theme');if(!t&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';if(t)document.documentElement.dataset.theme=t;var pl=localStorage.getItem('pel-palette');if(pl&&pl!=='original')document.documentElement.dataset.palette=pl;if(document.referrer&&new URL(document.referrer).origin===location.origin&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('pt-on')}catch(e){}})()</script>"
 
