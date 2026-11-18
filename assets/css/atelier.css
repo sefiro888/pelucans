@@ -17,3 +17,4 @@
 @media(min-width:1101px){.pro .nav-drop{position:static}.pro .nav-in{position:relative}.pro .nav-drop .mega{left:50%;top:100%;translate:-50% 8px}.pro .nav-drop:hover .mega,.pro .nav-drop:focus-within .mega,.pro .nav-drop.open .mega{translate:-50% 0}}
 @media(max-width:1100px){.pro .nav-drop .mega{translate:none!important}}
 @media(max-width:1020px){.pro .nav-links{top:var(--mobile-menu-top,110px);padding-bottom:105px}.pro .nav-drop .mega{position:static;width:100%;max-width:100%;translate:none!important}.pro .mega-care-grid{grid-template-columns:1fr 1fr}.pro .mega-heading{display:none}}@media(max-width:600px){.pro .mega-care-grid{grid-template-columns:1fr}}
+.live-tag[hidden]{display:none!important}
