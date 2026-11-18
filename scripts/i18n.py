@@ -8,6 +8,7 @@ try:
     from gl import GL
 except Exception:  # pragma: no cover
     GL = {}
+GL.update(json.loads((Path(__file__).parent / 'editorial_gl.json').read_text(encoding='utf-8')))
 MISSING = set()
 SUFFIX = ' | Pelucans · A Laracha'
 SUFFIX_OG = ' | Pelucans'
@@ -66,7 +67,7 @@ def to_galician(html, file):
         out.append(part)
     h = ''.join(out)
     # 2) idioma y rutas
-    h = h.replace('<html lang="es">', '<html lang="gl">', 1)
+    h = h.replace('<html lang="es"', '<html lang="gl"', 1)
     # datos estructurados: solo el LocalBusiness (el resto está en castellano)
     h = re.sub(r'<script type="application/ld\+json">(?:(?!</script>).)*?"@type": "(?:FAQPage|Service|Article|BreadcrumbList)"(?:(?!</script>).)*?</script>', '', h, flags=re.S)
     h = h.replace('href="site.webmanifest"', 'href="../site.webmanifest"')
@@ -78,6 +79,7 @@ def to_galician(html, file):
     h = h.replace(f'<link rel="alternate" hreflang="es" href="{file}"><link rel="alternate" hreflang="gl" href="gl/{file}">',
                   f'<link rel="alternate" hreflang="es" href="../{file}"><link rel="alternate" hreflang="gl" href="{file}">')
     h = h.replace('<script src="../assets/js/site.js" defer>', "<script>window.PEL_ROOT='../'</script><script src=\"../assets/js/site.js\" defer>", 1)
+    h = h.replace('<head>', "<head><script>window.PEL_ROOT='../'</script>", 1)
     return h
 
 def report():

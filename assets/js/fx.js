@@ -30,18 +30,6 @@
     e.preventDefault(); root.classList.add('pt-on'); setTimeout(() => { location.href = a.href; }, 380);
   });
 
-  /* ----- 2 · titular que rota ----- */
-  const ro = $('.rotor');
-  if (ro) {
-    const sc = ro.closest('.scribble'); const words = (ro.dataset.words || '').split('|').filter(Boolean); let i = 0;
-    const redraw = () => { if (!sc) return; sc.classList.remove('draw'); void sc.offsetWidth; sc.classList.add('draw'); };
-    redraw();
-    if (!reduce && words.length > 1) setInterval(() => {
-      ro.classList.add('out');
-      setTimeout(() => { i = (i + 1) % words.length; ro.textContent = words[i]; ro.classList.remove('out'); redraw(); }, 380);
-    }, 3400);
-  }
-
   /* ----- 3 · servicios con foto fija ----- */
   const items = $$('.sc-item');
   if (items.length && 'IntersectionObserver' in window) {
@@ -124,23 +112,6 @@
     };
     render();
   }
-
-  /* ----- Instagram en directo (Behold u otro feed JSON compatible) ----- */
-  $$('[data-ig-feed]').forEach(async grid => {
-    const url = grid.dataset.igFeed; if (!url) return;
-    try {
-      const r = await fetch(url, { cache: 'no-cache' }); if (!r.ok) return;
-      const j = await r.json(); const posts = (Array.isArray(j) ? j : j.posts || []).slice(0, 9); if (!posts.length) return;
-      const esc = s => String(s || '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
-      grid.innerHTML = posts.map(p => {
-        const im = (p.sizes && (p.sizes.medium || p.sizes.small || p.sizes.large || {}).mediaUrl) || (p.mediaType === 'VIDEO' ? p.thumbnailUrl : p.mediaUrl);
-        const cap = (p.prunedCaption || p.caption || '').split('\n')[0].slice(0, 110);
-        const isV = p.mediaType === 'VIDEO';
-        return `<a href="${esc(p.permalink)}" target="_blank" rel="noopener" aria-label="${esc(cap || 'Publicación de Instagram')}"><img src="${esc(im)}" alt="${esc(cap)}" loading="lazy">${isV ? '<span class="tp"><i class="bi bi-play-fill"></i></span>' : ''}<span class="cap">${esc(cap)}</span></a>`;
-      }).join('');
-      $$('[data-ig-live]').forEach(t => { t.hidden = false; });
-    } catch (_) { /* si falla se mantiene la copia fija */ }
-  });
 
   /* ----- índice de servicios: filtros ----- */
   const idx = $('.idx');

@@ -1,0 +1,13 @@
+ANTES / DESPUÉS · cómo añadir pares reales
+=========================================
+Copia aquí dos fotos por perro con este nombre:
+
+   nombre_raza_servicio_antes.jpg
+   nombre_raza_servicio_despues.jpg
+
+Ejemplo:  luna_caniche_corte-tijera_antes.jpg  +  luna_caniche_corte-tijera_despues.jpg
+(servicio = corte-tijera, stripping, deslanado, ozonoterapia, dermocosmetica, bano-manto,
+ corte-unas, comida-especializada o asesoramiento; si no coincide, se muestra tal cual).
+
+Mismo encuadre en las dos fotos queda mucho mejor. Después ejecuta:  python build.py
+Cuando haya 4 pares reales, las plantillas de ejemplo desaparecen solas.

@@ -64,7 +64,7 @@ def home(g):
     thumbs = ''.join(f'<span>{img(im, n)}</span>' for im, n, _, _, _ in PRODUCTS)
     tienda = f'''<section class="s-shop"><div class="wrap s-shop-in"><div class="reveal"><span class="eyebrow">Tienda en el salón</span><h2>Para casa, para el paseo,<br>para <em>la lluvia.</em></h2><p>Cosmética PSH y Artero, juguetes KONG, arneses con diseño y chubasqueros reversibles. Consulta stock y precios en su catálogo de WhatsApp. También somos punto de recogida Vinted Go.</p><div style="display:flex;flex-wrap:wrap;gap:.8rem"><a class="btn" href="tienda.html">Ver la tienda</a><a class="btn light" href="https://wa.me/c/34604207678" target="_blank" rel="noopener">{icon("whatsapp")} Catálogo en WhatsApp</a></div></div><div class="s-shop-thumbs reveal d1">{thumbs}</div></div></section>'''
 
-    body = h + ribbon(['Corte a tijera', 'Deslanado', 'Stripping', 'Baño de ozono', 'Dermocosmética', 'Corte de uñas', 'Asesoramiento', 'Tienda']) + cuidados + como + antes + opiniones + dia + tienda + visit_block() + cta()
+    body = h + ribbon(['Corte a tijera', 'Deslanado', 'Stripping', 'Baño de ozono', 'Dermocosmética', 'Corte de uñas', 'Asesoramiento', 'Tienda']) + cuidados + como + antes + opiniones + dia + g['ig_block']() + tienda + visit_block() + cta()
     page('index.html', 'Peluquería canina en A Laracha', 'Peluquería canina en A Laracha con Shadia: corte a tijera, deslanado, stripping, baño de ozono y dermocosmética. Atención uno a uno, sin jaulas. Pide cita: 604 207 678.', body, 'inicio', 'shadia-bimba-1', True)
 
 
