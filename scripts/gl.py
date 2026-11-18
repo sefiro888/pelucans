@@ -125,5 +125,19 @@ EXTRA = {
     'reels': 'reels',
     'un mismo': 'un mesmo',
     'Álbum': 'Álbum',
+    # --- reserva inteligente, 404 ---
+    'Así quedará tu mensaje': 'Así quedará a túa mensaxe',
+    'Copiar mensaje': 'Copiar mensaxe',
+    'Error 404': 'Erro 404',
+    'Esta página': 'Esta páxina',
+    'La página que buscas no existe. Vuelve al inicio de Pelucans, peluquería canina en A Laracha.': 'A páxina que buscas non existe. Volve ao inicio de Pelucans, perruquería canina na Laracha.',
+    'Lunes a viernes, y sábados con cita previa.': 'Luns a venres, e sábados con cita previa.',
+    'Por la mañana · 9:30–13:30': 'Pola mañá · 9:30–13:30',
+    'Por la tarde · 16:00–19:00': 'Pola tarde · 16:00–19:00',
+    'Puede que el enlace esté roto o que la página haya cambiado de sitio. Te llevamos de vuelta a lo importante.': 'Pode que a ligazón estea rota ou que a páxina cambiase de sitio. Levámoste de volta ao importante.',
+    'Página no encontrada': 'Páxina non atopada',
+    'Ver los servicios': 'Ver os servizos',
+    'Volver al inicio': 'Volver ao inicio',
+    'no existe.': 'non existe.',
 }
 GL.update(EXTRA)

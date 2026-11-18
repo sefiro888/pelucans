@@ -5,7 +5,8 @@ Las fotos reales se optimizan con:  python scripts/prepare_images.py
 from pathlib import Path
 from html import escape
 from urllib.parse import quote
-import json, sys, re
+import json, sys, re, time
+BUILD = str(int(time.time()))
 
 ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT / 'scripts'))
@@ -19,8 +20,10 @@ import i18n  # noqa: E402
 INSTAGRAM_FEED_URL = ''
 # Mientras no haya suficientes pares reales en assets/img/antes-despues/, se muestran plantillas
 # de ejemplo en el carrusel (ponlo a False para ocultarlas).
-SHOW_DEMO_PAIRS = True
+SHOW_DEMO_PAIRS = False
 MIN_PAIRS = 4
+# Dirección pública de la web (con barra final), p. ej. 'https://www.pelucans.es/'. Vacío = no se generan canonical ni sitemap.
+SITE_URL = ''
 CUR = {'file': 'index.html'}
 HEAD_SCRIPT = "<script>(function(){try{var t=localStorage.getItem('pel-theme');if(!t&&matchMedia('(prefers-color-scheme: dark)').matches)t='dark';if(t)document.documentElement.dataset.theme=t;var pl=localStorage.getItem('pel-palette');if(pl&&pl!=='original')document.documentElement.dataset.palette=pl;if(document.referrer&&new URL(document.referrer).origin===location.origin&&!matchMedia('(prefers-reduced-motion: reduce)').matches)document.documentElement.classList.add('pt-on')}catch(e){}})()</script>"
 
@@ -101,7 +104,8 @@ PRODUCTS = [
 # ----------------------------------------------------------------- bloques
 TICKER = ['★ 5,0 en Google · 208 opiniones', 'Atención uno a uno · sin jaulas · sin prisas', 'Orejeras protectoras en el secado', 'Desde un maltés hasta un San Bernardo', 'Punto de recogida Vinted Go', f'Pide cita: {PHONE}']
 def ticker():
-    return '<div class="ticker" aria-label="Información destacada"><div class="ticker-track">' + ''.join(f'<span>{t}</span>' for t in TICKER) + '</div></div>'
+    items = ['<em class="open-pill tk-open" data-open>Horario</em>'] + TICKER
+    return '<div class="ticker" aria-label="Información destacada"><div class="ticker-track">' + ''.join(f'<span>{t}</span>' for t in items) + '</div></div>'
 
 def nav(active=''):
     mega = ''.join(f'<a href="servicio-{s["slug"]}.html">{icon(s["icon"])}{s["name"]}</a>' for s in SERVICES)
@@ -165,11 +169,28 @@ def footer():
 <dialog id="reel-dialog" class="reel-dialog" aria-label="Reel de Instagram"><button class="x" aria-label="Cerrar">×</button><iframe title="Reel de Pelucans en Instagram" allow="autoplay; encrypted-media; fullscreen" loading="lazy"></iframe><div style="padding:.7rem;text-align:center;background:var(--paper)"><a class="ext link-arrow" target="_blank" rel="noopener" href="{IG}">Abrir en Instagram ↗</a></div></dialog>
 <dialog id="privacy"><button class="x" aria-label="Cerrar">×</button><span class="eyebrow">Tu privacidad</span><h2 style="font-size:2rem">Una consulta directa.</h2><p>El formulario prepara un mensaje en tu dispositivo y abre WhatsApp. Esta web no guarda tus respuestas ni confirma reservas automáticamente: tú decides si envías el mensaje.</p><p>Los reels se cargan desde Instagram y el mapa desde Google Maps solo cuando tú lo pulsas, y cada servicio aplica su propia política de privacidad. No usamos analítica ni publicidad.</p><p>Para consultas sobre los datos que compartas con Pelucans, llama al {PHONE}.</p></dialog>'''
 
-def page(file, title, description, body, active='', og='fachada', home=False, cls='pro'):
+def page(file, title, description, body, active='', og='fachada', home=False, cls='pro', ld=None):
     CUR['file'] = file
+    if SITE_URL:
+        canon = f'<link rel="canonical" href="{SITE_URL}{file}">'
+        ogurl = f'<meta property="og:url" content="{SITE_URL}{file}">'
+        alt = f'<link rel="alternate" hreflang="es" href="{SITE_URL}{file}"><link rel="alternate" hreflang="gl" href="{SITE_URL}gl/{file}"><link rel="alternate" hreflang="x-default" href="{SITE_URL}{file}">'
+    else:
+        canon = ogurl = ''
+        alt = f'<link rel="alternate" hreflang="es" href="{file}"><link rel="alternate" hreflang="gl" href="gl/{file}">'
+    ld_scripts = ''
+    for item in (ld or []):
+        ld_scripts += '<script type="application/ld+json">' + json.dumps(item, ensure_ascii=False) + '</script>'
+    if SITE_URL and file != 'index.html':
+        trail = [('Inicio', 'index.html')]
+        if file.startswith('servicio-'): trail.append(('Servicios', 'servicios.html'))
+        if file.startswith('consejo-'): trail.append(('Consejos', 'consejos.html'))
+        trail.append((title, file))
+        ld_scripts += '<script type="application/ld+json">' + json.dumps({'@context': 'https://schema.org', '@type': 'BreadcrumbList', 'itemListElement': [{'@type': 'ListItem', 'position': i + 1, 'name': n, 'item': SITE_URL + f} for i, (n, f) in enumerate(trail)]}, ensure_ascii=False) + '</script>'
     body = body.replace('@@FILE@@', file)
     schema = {'@context': 'https://schema.org', '@type': ['LocalBusiness', 'PetGroomer'] if False else 'LocalBusiness', 'name': 'Pelucans Peluquería Canina', 'description': 'Peluquería canina en A Laracha: corte a tijera, deslanado, stripping, baño de ozono, dermocosmética y asesoramiento.', 'telephone': '+34604207678', 'image': R + 'fachada.webp', 'address': {'@type': 'PostalAddress', 'streetAddress': 'Avda. Doutor López Astray, 40', 'postalCode': '15145', 'addressLocality': 'A Laracha', 'addressRegion': 'A Coruña', 'addressCountry': 'ES'}, 'sameAs': [IG, FB, PAXINAS, AMARILLAS], 'aggregateRating': {'@type': 'AggregateRating', 'ratingValue': '5.0', 'reviewCount': '208'}, 'openingHoursSpecification': [{'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], 'opens': '09:30', 'closes': '13:30'}, {'@type': 'OpeningHoursSpecification', 'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'], 'opens': '16:00', 'closes': '19:00'}]}
-    html = f'''<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f1e8"><title>{escape(title)} | Pelucans · A Laracha</title><meta name="description" content="{escape(description, True)}"><meta property="og:title" content="{escape(title, True)} | Pelucans"><meta property="og:description" content="{escape(description, True)}"><meta property="og:type" content="website"><meta property="og:image" content="{R}{og}.webp"><link rel="icon" href="{R}perfil.webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Figtree:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,800;1,9..144,500;1,9..144,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><link rel="stylesheet" href="assets/css/site.css"><link rel="stylesheet" href="assets/css/extra.css"><link rel="stylesheet" href="assets/css/fx.css"><link rel="stylesheet" href="assets/css/palettes.css"><link rel="stylesheet" href="assets/css/premium.css"><link rel="stylesheet" href="assets/css/premium2.css"><link rel="stylesheet" href="assets/css/palettes-contraste.css"><link rel="alternate" hreflang="es" href="{file}"><link rel="alternate" hreflang="gl" href="gl/{file}">{HEAD_SCRIPT}<script src="assets/js/site.js" defer></script><script src="assets/js/fx.js" defer></script><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script></head><body class="{'home' if home else 'inner'}{(' ' + cls) if cls else ''}"><div class="pt" aria-hidden="true"><img src="{R}perfil.webp" alt=""></div>{nav(active)}<main id="contenido">{body}</main>{footer()}</body></html>'''
+    html = f'''<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f7f1e8"><title>{escape(title)} | Pelucans · A Laracha</title><meta name="description" content="{escape(description, True)}"><meta property="og:title" content="{escape(title, True)} | Pelucans"><meta property="og:description" content="{escape(description, True)}"><meta property="og:type" content="website">{ogurl}<meta property="og:image" content="{R}{og}.webp"><link rel="icon" href="{R}perfil.webp"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Figtree:wght@400;500;600;700;800&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;0,9..144,800;1,9..144,500;1,9..144,700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"><link rel="stylesheet" href="assets/css/site.css"><link rel="stylesheet" href="assets/css/extra.css"><link rel="stylesheet" href="assets/css/fx.css"><link rel="stylesheet" href="assets/css/palettes.css"><link rel="stylesheet" href="assets/css/premium.css"><link rel="stylesheet" href="assets/css/premium2.css"><link rel="stylesheet" href="assets/css/palettes-contraste.css">{canon}{alt}<link rel="manifest" href="site.webmanifest"><link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png"><link rel="icon" type="image/png" sizes="32x32" href="assets/icons/favicon-32.png">{HEAD_SCRIPT}<script src="assets/js/site.js" defer></script><script src="assets/js/fx.js" defer></script><script type="application/ld+json">{json.dumps(schema, ensure_ascii=False)}</script>{ld_scripts}</head><body class="{'home' if home else 'inner'}{(' ' + cls) if cls else ''}"><div class="pt" aria-hidden="true"><img src="{R}perfil.webp" alt=""></div>{nav(active)}<main id="contenido">{body}</main>{footer()}</body></html>'''
+    html = re.sub(r'(assets/(?:css|js)/[\w-]+\.(?:css|js))"', r'\1?v=' + BUILD + '"', html)
     (ROOT / file).write_text(html, encoding='utf-8')
     gl_dir = ROOT / 'gl'; gl_dir.mkdir(exist_ok=True)
     (gl_dir / file).write_text(i18n.to_galician(html, file), encoding='utf-8')
@@ -211,7 +232,7 @@ def ba_pairs():
             pairs.append(dict(name=nm, service=sv, demo=True))
     return pairs
 
-def ba_carousel():
+def _ba_multi():
     sl = ''
     for q in ba_pairs():
         if q['demo']:
@@ -221,6 +242,14 @@ def ba_carousel():
         sl += f'<div class="ba-slide"><div class="compare{" demo" if q["demo"] else ""}" aria-label="Comparador de antes y después: {q["name"]}">{inner}<span class="tag l">Antes</span><span class="tag r">Después</span><div class="handle"></div><input type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar el antes y el después"></div><div class="ba-cap"><b>{q["name"]}</b><span>{q["service"]}</span></div></div>'
     note = '<p style="font-size:.85rem;color:var(--muted);margin:.8rem 0 0">Las tarjetas con huellas son plantillas: cuando Shadia pase más pares de fotos reales, ocuparán su lugar.</p>' if any(q['demo'] for q in ba_pairs()) else ''
     return f'<div class="ba-car"><div class="ba-track" tabindex="0" aria-label="Carrusel de antes y después">{sl}</div><div class="ba-ctrl"><button class="prev" aria-label="Anterior">‹</button><div class="ba-mid"><div class="ba-dots"></div><span class="ba-count" aria-live="polite"></span></div><button class="next" aria-label="Siguiente">›</button></div>{note}</div>'
+
+def ba_carousel():
+    qs = ba_pairs()
+    if len(qs) == 1:
+        q = qs[0]
+        return f'<div class="ba-one"><div class="compare" aria-label="Comparador de antes y después: {q["name"]}"><img src="{q["a"]}" alt="{q["name"]} antes de su sesión en Pelucans" loading="lazy"><img class="after" src="{q["d"]}" alt="{q["name"]} después de su sesión en Pelucans" loading="lazy"><span class="tag l">Antes</span><span class="tag r">Después</span><div class="handle"></div><input type="range" min="0" max="100" value="50" aria-label="Deslizar para comparar el antes y el después"></div><div class="ba-cap"><b>{q["name"]}</b><span>{q["service"]}</span></div></div>'
+    return _ba_multi()
+
 
 def showcase():
     pics = ''.join(f'<img src="{R}{MEDIA[x["slug"]]["hero"]}.webp" alt="{x["name"]} en Pelucans" style="object-position:{MEDIA[x["slug"]]["pos"]}"' + (' class="on"' if i == 0 else ' loading="lazy"') + '>' for i, x in enumerate(SERVICES))
@@ -255,7 +284,7 @@ def advice_post_pages():
         body = f"""<section class="p-hero"><div class="paw-bg"></div><div class="wrap p-hero-grid"><div><nav class="crumbs" aria-label="Migas"><a href="index.html">Inicio</a> / <a href="consejos.html">Consejos</a> / <span>{x['tag']}</span></nav><span class="eyebrow">{x['tag']} · {x['mins']} min de lectura</span><h1 style="font-size:clamp(2.2rem,5vw,4.2rem)">{x['title']}</h1><p class="lead">{x['excerpt']}</p></div><div class="p-photo float">{img(x['img'], x['title'], lazy=False, pos=x['pos'])}</div></div></section>
 <section class="section tint"><div class="wrap"><article class="article">{x['body']}<figure>{img(x['img2'], 'Imagen del salón de Pelucans', pos='center 30%')}<figcaption>Del día a día en Pelucans.</figcaption></figure><div class="note">{icon('heart-fill')}<span>Estos consejos son orientativos. Cada perro es distinto: si tienes dudas, escríbenos y lo vemos con su manto delante.</span></div><div style="margin-top:1.6rem">{btn('Consultar a Shadia', 'Hola Shadia, he leído el consejo «' + x['title'] + '» y tengo una pregunta.')}</div></article></div></section>
 <section class="section"><div class="wrap">{sec_head('Sigue leyendo', 'Más <em>consejos.</em>')}{blog_cards(others)}</div></section>""" + cta()
-        page(f'consejo-{x["slug"]}.html', x['title'], x['excerpt'], body, 'consejos', x['img'])
+        page(f'consejo-{x["slug"]}.html', x['title'], x['excerpt'], body, 'consejos', x['img'], ld=[{'@context': 'https://schema.org', '@type': 'Article', 'headline': x['title'], 'description': x['excerpt'], 'image': R + x['img'] + '.webp', 'author': {'@type': 'Person', 'name': 'Shadia Cotelo'}, 'publisher': {'@type': 'Organization', 'name': 'Pelucans Peluquería Canina'}}])
 
 # ----------------------------------------------------------------- INICIO
 def home_page():
@@ -301,7 +330,7 @@ def service_page(s, i):
     nxt = [others[(i + j) % len(others)] for j in range(3)]
     body += f'''<section class="section"><div class="wrap">{sec_head('Más cuidados', 'Quizá también<br>le <em>apetezca…</em>')}<div class="bento">''' + ''.join(service_card(o, k, False) for k, o in nxt) + '</div></div></section>'
     body += cta(f"Hola Shadia, me gustaría pedir información y cita para {s['name']}.", f'Reserva {s["name"].lower()} <em>sin prisas.</em>')
-    page(f'servicio-{s["slug"]}.html', s['name'], s['short'] + ' En Pelucans, A Laracha. Atención individual con Shadia y cita por WhatsApp.', body, 'servicios', m['hero'] if not m['hero'].startswith('story') else m['hero2'], cls='pro')
+    page(f'servicio-{s["slug"]}.html', s['name'], s['short'] + ' En Pelucans, A Laracha. Atención individual con Shadia y cita por WhatsApp.', body, 'servicios', m['hero'] if not m['hero'].startswith('story') else m['hero2'], cls='pro', ld=[{'@context': 'https://schema.org', '@type': 'FAQPage', 'mainEntity': [{'@type': 'Question', 'name': q, 'acceptedAnswer': {'@type': 'Answer', 'text': a}} for q, a in s['faq']]}, {'@context': 'https://schema.org', '@type': 'Service', 'name': s['name'], 'description': s['short'], 'areaServed': 'A Laracha, A Coruña', 'provider': {'@type': 'LocalBusiness', 'name': 'Pelucans Peluquería Canina', 'telephone': '+34604207678'}}])
 
 # ----------------------------------------------------------------- TIENDA
 def shop_page():
@@ -334,13 +363,27 @@ def contact_page():
     opts = '<option value="">Ayúdame a elegir</option>' + ''.join(f'<option>{s["name"]}</option>' for s in SERVICES) + '<option>Tienda / productos</option>'
     body = f'''<section class="p-hero"><div class="paw-bg"></div><div class="wrap p-hero-grid"><div><nav class="crumbs" aria-label="Migas"><a href="index.html">Inicio</a> / <span>Contacto</span></nav><span class="eyebrow">Pide tu cita</span><h1>Su próximo cuidado<br>empieza con un <em class="scribble">hola.</em></h1><p class="lead">Cuéntanos cómo es tu perro y qué necesita. Te responderemos para acordar el servicio, el presupuesto y su cita.</p><a class="big-phone" href="tel:+34604207678">{icon('telephone-fill')} {PHONE}</a><div class="hero-cta" style="margin-top:0">{btn()}<a class="btn light" href="{IG_DM}" target="_blank" rel="noopener">{icon('instagram')} Escribir por Instagram</a></div></div><div class="p-photo float">{img('fachada', 'Fachada de Pelucans en la Avenida Doutor López Astray', lazy=False)}<span class="sticker">¡aquí estamos!</span></div></div></section>'''
     body += f'''<section class="section tint"><div class="wrap contact-grid"><div>{heading('Hablemos de tu peludo', '¿Le guardamos<br>un <em>momento?</em>', 'Rellena lo que quieras contarnos. Prepararemos el mensaje para que lo revises y lo envíes por WhatsApp.')}<div class="hours reveal d1" style="margin-top:1.6rem"><h3>Cuándo venir <span class="open-pill" data-open>Horario</span></h3><div class="hour-row" data-day="1-5"><span>Lunes a viernes</span><strong>9:30–13:30<br>16:00–19:00</strong></div><div class="hour-row" data-day="6"><span>Sábados</span><strong>Con cita previa</strong></div><div class="hour-row" data-day="0"><span>Domingos</span><strong>Cerrado</strong></div></div></div>
-<form class="form reveal d1" id="booking-form"><span class="eyebrow">Su primer hola</span><h2 style="font-size:2.2rem">Cuéntanos un poquito.</h2><div class="form-grid"><label>Tu nombre *<input name="name" autocomplete="given-name" required maxlength="80" placeholder="¿Cómo te llamas?"></label><label>Nombre de tu perro *<input name="dog" required maxlength="80" placeholder="El protagonista"></label><label>Raza o tamaño<input name="breed" maxlength="100" placeholder="Mestizo, 12 kg…"></label><label>¿Qué necesita?<select name="service">{opts}</select></label><label>Día preferido<input type="date" name="date"></label><label>Franja<select name="time"><option>Me adapto</option><option>Por la mañana</option><option>Por la tarde</option></select></label><label class="full">Algo que debamos saber<textarea name="notes" rows="3" maxlength="800" placeholder="Es su primera visita, se asusta con el secador…"></textarea></label></div><p class="form-note">No guardamos este formulario. Al continuar se abre WhatsApp; el mensaje solo se envía cuando tú lo confirmas allí.</p><button class="btn wa" type="submit">{icon('whatsapp')} Preparar mi consulta</button><p class="form-status" aria-live="polite"></p></form></div></section>'''
+<form class="form reveal d1" id="booking-form"><span class="eyebrow">Su primer hola</span><h2 style="font-size:2.2rem">Cuéntanos un poquito.</h2><div class="form-grid"><label>Tu nombre *<input name="name" autocomplete="given-name" required maxlength="80" placeholder="¿Cómo te llamas?"></label><label>Nombre de tu perro *<input name="dog" required maxlength="80" placeholder="El protagonista"></label><label>Raza o tamaño<input name="breed" maxlength="100" placeholder="Mestizo, 12 kg…"></label><label>¿Qué necesita?<select name="service">{opts}</select></label><label>Día preferido<input type="date" name="date" data-date><small class="hint" data-date-hint>Lunes a viernes, y sábados con cita previa.</small></label><fieldset class="chips"><legend>Franja</legend><label><input type="radio" name="time" value="Me adapto" checked><span>Me adapto</span></label><label><input type="radio" name="time" value="Por la mañana"><span>Por la mañana · 9:30–13:30</span></label><label><input type="radio" name="time" value="Por la tarde"><span>Por la tarde · 16:00–19:00</span></label></fieldset><label class="full">Algo que debamos saber<textarea name="notes" rows="3" maxlength="800" placeholder="Es su primera visita, se asusta con el secador…"></textarea></label></div><p class="form-note">No guardamos este formulario. Al continuar se abre WhatsApp; el mensaje solo se envía cuando tú lo confirmas allí.</p><div class="preview"><span class="eyebrow">Así quedará tu mensaje</span><pre data-preview aria-live="polite"></pre></div><div class="form-actions"><button class="btn wa" type="submit">{icon('whatsapp')} Preparar mi consulta</button><button class="btn light" type="button" data-copy>{icon('clipboard')} Copiar mensaje</button></div><p class="form-status" aria-live="polite"></p></form></div></section>'''
     body += area_map()
     body += f'''<section class="section" id="ubicacion"><div class="wrap">{sec_head('Nos vemos en A Laracha', 'Muy cerca.<br>Muy fácil <em>llegar.</em>', 'Avda. Doutor López Astray, 40 bajo · 15145 A Laracha, A Coruña. Con sitio para aparcar.')}<div class="visit"><div class="facade reveal">{img('fachada', 'Fachada de Pelucans')}<div class="tagline">Busca el cristal con la huella y el cartel «Pelucans».</div></div><div class="map-panel reveal d1" id="map-panel"><div><h3>Tu próxima parada: Pelucans</h3><p>Carga el mapa de Google para ver la ubicación. Al hacerlo, conectarás con Google Maps.</p><button class="btn" id="load-map">{icon('geo-alt-fill')} Ver mapa interactivo</button><p style="margin-top:1rem"><a class="link-arrow" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Pelucans+Peluquer%C3%ADa+Canina+Avenida+Doutor+L%C3%B3pez+Astray+40+A+Laracha">Abrir ruta en Google Maps ↗</a></p></div></div></div></div></section>'''
     body += f'''<section class="section sage"><div class="wrap split"><div>{heading('También en Pelucans', 'Punto <em>Vinted Go.</em>', 'Recoge y devuelve tus paquetes de Vinted en el salón.')}<div class="reveal d2" style="margin-top:1.2rem"><a class="btn" href="tienda.html#vinted">Más información</a></div></div><div class="socials reveal d1" style="justify-content:flex-start"><a href="{IG}" target="_blank" rel="noopener">{icon('instagram')} Instagram</a><a href="{FB}" target="_blank" rel="noopener">{icon('facebook')} Facebook</a><a href="{GOOGLE}" target="_blank" rel="noopener">{icon('google')} Reseñas en Google</a><a href="{CATALOGO}" target="_blank" rel="noopener">{icon('whatsapp')} Catálogo WhatsApp</a><a href="{PAXINAS}" target="_blank" rel="noopener">{icon('journal-text')} Páxinas Galegas</a><a href="{AMARILLAS}" target="_blank" rel="noopener">{icon('journal-bookmark')} Páginas Amarillas</a></div></div></section>'''
     page('contacto.html', 'Contacto y cita por WhatsApp', 'Pide cita en Pelucans, peluquería canina en A Laracha. Teléfono y WhatsApp 604 207 678. Avda. Doutor López Astray, 40. Horario, mapa y parking.', body, 'contacto', 'fachada')
 
-home_page(); services_page(); shop_page(); gallery_page(); about_page(); contact_page(); advice_page(); advice_post_pages()
+def not_found():
+    body = f'''<section class="s-hero"><div class="wrap" style="max-width:760px;text-align:center;padding-block:clamp(3rem,8vw,6rem)"><span class="eyebrow" style="justify-content:center">Error 404</span><h1>Esta página<br><em>no existe.</em></h1><p class="lead" style="margin-inline:auto">Puede que el enlace esté roto o que la página haya cambiado de sitio. Te llevamos de vuelta a lo importante.</p><div class="s-cta" style="justify-content:center"><a class="btn" href="index.html">Volver al inicio</a><a class="s-link" href="servicios.html">Ver los servicios {icon('arrow-up-right')}</a></div></div></section>'''
+    page('404.html', 'Página no encontrada', 'La página que buscas no existe. Vuelve al inicio de Pelucans, peluquería canina en A Laracha.', body, '', 'fachada')
+
+
+def seo_files():
+    (ROOT / 'robots.txt').write_text('User-agent: *\nAllow: /\n' + (f'Sitemap: {SITE_URL}sitemap.xml\n' if SITE_URL else ''), encoding='utf-8')
+    if not SITE_URL:
+        return
+    pages = sorted(f.name for f in ROOT.glob('*.html') if f.name != '404.html')
+    urls = ''.join(f'<url><loc>{SITE_URL}{n}</loc><xhtml:link rel="alternate" hreflang="es" href="{SITE_URL}{n}"/><xhtml:link rel="alternate" hreflang="gl" href="{SITE_URL}gl/{n}"/></url><url><loc>{SITE_URL}gl/{n}</loc><xhtml:link rel="alternate" hreflang="es" href="{SITE_URL}{n}"/><xhtml:link rel="alternate" hreflang="gl" href="{SITE_URL}gl/{n}"/></url>' for n in pages)
+    (ROOT / 'sitemap.xml').write_text('<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">' + urls + '</urlset>', encoding='utf-8')
+
+
+home_page(); services_page(); shop_page(); gallery_page(); about_page(); contact_page(); advice_page(); advice_post_pages(); not_found(); seo_files()
 for i, s in enumerate(SERVICES): service_page(s, i)
 n = i18n.report()
 print('Generadas 19 páginas (+19 en gallego). Textos pendientes de traducir:', n)

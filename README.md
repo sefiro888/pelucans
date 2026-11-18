@@ -74,3 +74,11 @@ Flujo de trabajo: editar `build.py` o `scripts/content.py` → `python build.py`
 ## Repositorio
 
 Este repositorio no incluye los materiales de trabajo (`raw_ig/`, `img/`, `_backup_v1/`, `preview/`, `referencias/`). Las fotos ya optimizadas están en `assets/img/real/`. Para regenerar el HTML basta con `python build.py`; `scripts/prepare_images.py` solo es necesario si se vuelven a descargar las fotos originales.
+
+## v7 · reserva inteligente y SEO técnico
+
+- **Formulario de cita** (`contacto.html`): vista previa del mensaje de WhatsApp, franjas con botones, fecha mínima = hoy, aviso en domingos (cerrado) y sábados (cita previa) y botón «Copiar mensaje».
+- **Antes/después** muestra solo el par real; cuando haya más pares en `assets/img/antes-despues/` vuelve el carrusel solo.
+- **SEO**: datos estructurados en fichas de servicio (FAQPage, Service) y consejos (Article). Cuando la web tenga dirección pública, escribe `SITE_URL = 'https://tu-dominio.es/'` en `build.py` y ejecuta `python build.py`: se generan `canonical`, `og:url`, `hreflang`, `BreadcrumbList` y `sitemap.xml`.
+- **404.html**, `site.webmanifest` e iconos (`scripts/make_icons.py`): la web se puede instalar en el móvil.
+- Los CSS y JS llevan `?v=…` para que el navegador no use archivos antiguos tras cada publicación.

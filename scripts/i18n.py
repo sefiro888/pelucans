@@ -67,6 +67,11 @@ def to_galician(html, file):
     h = ''.join(out)
     # 2) idioma y rutas
     h = h.replace('<html lang="es">', '<html lang="gl">', 1)
+    # datos estructurados: solo el LocalBusiness (el resto está en castellano)
+    h = re.sub(r'<script type="application/ld\+json">(?:(?!</script>).)*?"@type": "(?:FAQPage|Service|Article|BreadcrumbList)"(?:(?!</script>).)*?</script>', '', h, flags=re.S)
+    h = h.replace('href="site.webmanifest"', 'href="../site.webmanifest"')
+    h = re.sub(r'(<link rel="canonical" href="[^"]*?/)(' + re.escape(file) + r'")', r'\1gl/\2', h)
+    h = re.sub(r'(<meta property="og:url" content="[^"]*?/)(' + re.escape(file) + r'")', r'\1gl/\2', h)
     h = re.sub(r'(["\'])assets/', r'\1../assets/', h)
     h = h.replace(f'<a href="{file}" lang="es" aria-current="true">ES</a><a href="gl/{file}" lang="gl" hreflang="gl">GL</a>',
                   f'<a href="../{file}" lang="es" hreflang="es">ES</a><a href="{file}" lang="gl" aria-current="true">GL</a>')

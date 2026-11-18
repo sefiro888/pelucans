@@ -111,3 +111,37 @@
 }
 .s-rating{flex-wrap:wrap}
 @media (max-width:640px){.s-rating{padding:.6rem 1rem;gap:.5rem .8rem}.s-rv-head{align-items:flex-start}}
+
+
+/* ---------- Entrada suave de la cabecera ---------- */
+@media (prefers-reduced-motion:no-preference){
+  .s-hero-copy>*{opacity:0;translate:0 22px;animation:rise .9s cubic-bezier(.2,.8,.2,1) forwards}
+  .s-hero-copy>*:nth-child(1){animation-delay:.05s}.s-hero-copy>*:nth-child(2){animation-delay:.12s}.s-hero-copy>*:nth-child(3){animation-delay:.2s}
+  .s-hero-copy>*:nth-child(4){animation-delay:.28s}.s-hero-copy>*:nth-child(5){animation-delay:.36s}.s-hero-copy>*:nth-child(6){animation-delay:.44s}
+  .s-main{animation:unveil 1.3s .15s cubic-bezier(.2,.8,.2,1) both}
+  .s-small{animation:rise .9s .7s cubic-bezier(.2,.8,.2,1) both}
+}
+@keyframes rise{to{opacity:1;translate:0 0}}
+@keyframes unveil{from{clip-path:inset(0 0 100% 0)}to{clip-path:inset(0 0 0 0)}}
+
+/* ---------- Antes/después con un solo par ---------- */
+.ba-one{max-width:520px;margin-inline:auto;padding-inline:1.25rem}
+.ba-one .compare{aspect-ratio:4/4.4}
+
+/* ---------- Estado «abierto ahora» en la cinta ---------- */
+.tk-open{font-style:normal;background:transparent;border:0;padding:0;color:var(--butter);font-size:inherit;font-weight:700;letter-spacing:inherit;text-transform:inherit;display:inline-flex;align-items:center;gap:.6rem}
+.tk-open::before{width:8px;height:8px}
+
+/* ---------- Reserva inteligente ---------- */
+.hint{font-weight:500;color:var(--muted);font-size:.8rem;line-height:1.3}
+.chips{grid-column:1/-1;border:0;padding:0;margin:0;display:flex;flex-wrap:wrap;gap:.6rem}
+.chips legend{font-weight:700;font-size:.92rem;margin-bottom:.5rem;padding:0}
+.chips label{flex-direction:row;display:block}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;border:1px solid var(--hair);border-radius:999px;padding:.65rem 1.1rem;font-weight:600;font-size:.9rem;cursor:pointer;transition:.25s;background:var(--cream)}
+.chips input:checked+span{background:var(--ink);color:var(--on-ink);border-color:var(--ink)}
+.chips input:focus-visible+span{outline:3px solid var(--pink-d);outline-offset:2px}
+.preview{margin:1.2rem 0;border:1px dashed var(--hair);border-radius:var(--r-m);padding:1rem 1.2rem;background:var(--cream)}
+.preview .eyebrow{margin-bottom:.6rem}
+.preview pre{margin:0;white-space:pre-wrap;font:500 .92rem/1.55 var(--ff-body);color:var(--ink-2)}
+.form-actions{display:flex;flex-wrap:wrap;gap:.8rem;align-items:center}

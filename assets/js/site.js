@@ -142,19 +142,44 @@
   document.addEventListener('keydown', e => { if (!box.classList.contains('on')) return; if (e.key === 'Escape') closeHL(); if (e.key === 'ArrowRight') next(); if (e.key === 'ArrowLeft') prev(); });
   document.addEventListener('click', e => { const b = e.target.closest('[data-hl]'); if (b) openHL(b.dataset.hl); });
 
-  /* ----- formulario → WhatsApp ----- */
+  /* ----- formulario → WhatsApp (con vista previa, fechas y copiar) ----- */
   const form = $('#booking-form');
   if (form) {
     const q = new URLSearchParams(location.search).get('servicio'); if (q && form.service) form.service.value = q;
-    form.addEventListener('submit', e => {
-      e.preventDefault(); const d = Object.fromEntries(new FormData(form));
-      const lines = [T('Hola Shadia, me gustaría pedir cita.', 'Ola Shadia, gustaríame pedir cita.'), '', `${T('Mi nombre', 'O meu nome')}: ${d.name}`, `${T('Mi perro', 'O meu can')}: ${d.dog}`];
-      if (d.breed) lines.push(`${T('Raza o tamaño', 'Raza ou tamaño')}: ${d.breed}`); if (d.service) lines.push(`${T('Servicio', 'Servizo')}: ${d.service}`);
-      if (d.date) lines.push(`${T('Día preferido', 'Día preferido')}: ${d.date}`); if (d.time && d.time !== 'Me adapto' && d.time !== 'Adáptome') lines.push(`${T('Franja', 'Franxa')}: ${d.time}`);
+    const prev = $('[data-preview]', form), status = $('.form-status', form), di = $('[data-date]', form), hint = $('[data-date-hint]', form);
+    const today = new Date(Date.now() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, 10);
+    if (di) di.min = today;
+    const compose = () => {
+      const d = Object.fromEntries(new FormData(form)); const tl = form.querySelector('input[name=time]:checked');
+      const lines = [T('Hola Shadia, me gustaría pedir cita.', 'Ola Shadia, gustaríame pedir cita.'), '',
+        `${T('Mi nombre', 'O meu nome')}: ${d.name || '…'}`, `${T('Mi perro', 'O meu can')}: ${d.dog || '…'}`];
+      if (d.breed) lines.push(`${T('Raza o tamaño', 'Raza ou tamaño')}: ${d.breed}`);
+      if (d.service) lines.push(`${T('Servicio', 'Servizo')}: ${d.service}`);
+      if (d.date) lines.push(`${T('Día preferido', 'Día preferido')}: ${d.date.split('-').reverse().join('/')}`);
+      if (tl && tl.value !== 'Me adapto') lines.push(`${T('Franja', 'Franxa')}: ${tl.parentElement.textContent.trim()}`);
       if (d.notes) lines.push('', `${T('Algo importante', 'Algo importante')}: ${d.notes}`);
-      const url = 'https://wa.me/34604207678?text=' + encodeURIComponent(lines.join('\n'));
-      $('.form-status', form).textContent = T('Abriendo WhatsApp con tu mensaje preparado… tú decides si lo envías.', 'Abrindo WhatsApp coa túa mensaxe preparada… ti decides se a envías.');
+      return lines.join('\n');
+    };
+    const update = () => { if (prev) prev.textContent = compose(); };
+    if (di && hint) di.addEventListener('input', () => {
+      const v = di.value; if (!v) { hint.textContent = T('Lunes a viernes, y sábados con cita previa.', 'Luns a venres, e sábados con cita previa.'); di.setCustomValidity(''); return; }
+      const wd = new Date(v + 'T12:00').getDay();
+      if (wd === 0) { hint.textContent = T('Los domingos estamos cerrados. Elige otro día.', 'Os domingos estamos pechados. Elixe outro día.'); di.setCustomValidity(T('Los domingos estamos cerrados', 'Os domingos estamos pechados')); }
+      else if (wd === 6) { hint.textContent = T('Sábados solo con cita previa: te confirmaremos si hay hueco.', 'Sábados só con cita previa: confirmarémosche se hai oco.'); di.setCustomValidity(''); }
+      else { hint.textContent = T('Perfecto, te confirmaremos la hora.', 'Perfecto, confirmarémosche a hora.'); di.setCustomValidity(''); }
+    });
+    form.addEventListener('input', update); form.addEventListener('change', update); update();
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      const url = 'https://wa.me/34604207678?text=' + encodeURIComponent(compose());
+      status.textContent = T('Abriendo WhatsApp con tu mensaje preparado… tú decides si lo envías.', 'Abrindo WhatsApp coa túa mensaxe preparada… ti decides se a envías.');
       open(url, '_blank', 'noopener');
+    });
+    const cp = $('[data-copy]', form);
+    cp && cp.addEventListener('click', async () => {
+      const t = compose();
+      try { await navigator.clipboard.writeText(t); } catch (_) { const ta = document.createElement('textarea'); ta.value = t; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); } catch (__) {} ta.remove(); }
+      status.textContent = T('Mensaje copiado. Pégalo donde prefieras.', 'Mensaxe copiada. Pégaa onde prefiras.');
     });
   }
 
