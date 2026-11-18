@@ -1,0 +1,13 @@
+# Materiales de trabajo que no hacen falta para publicar la web
+raw_ig/
+_backup_v1/
+img/
+preview/
+referencias/
+.claude/
+scripts/gl_pendientes.txt
+scripts/patch_*.py
+__pycache__/
+*.pyc
+desktop.ini
+Thumbs.db

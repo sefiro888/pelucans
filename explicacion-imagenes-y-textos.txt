@@ -1,0 +1,149 @@
+================================================================================
+GUÍA DE IMÁGENES RESCATADAS DE INSTAGRAM Y TEXTOS PARA LA WEB
+Perfil origen: https://www.instagram.com/pelucans_peluqueriacanina/
+Negocio: Pelucans | Peluquería Canina (Shadia Cotelo Iglesias)
+Dirección: Avda. Doutor López Astray, 40, 15145 A Laracha (A Coruña)
+Teléfono / Citas: 604 20 76 78
+================================================================================
+
+--------------------------------------------------------------------------------
+1. ARCHIVO: logo-pelucans.jpg
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HA COGIDO:
+  Foto de perfil oficial de la cuenta de Instagram @pelucans_peluqueriacanina.
+- DÓNDE USARLA EN LA WEB:
+  Cabecera (Navbar), Footer y Favicon.
+- TEXTO / ALT RECOMENDADO:
+  "Pelucans Peluquería Canina en A Laracha - Cuidado, estética y bienestar animal"
+
+--------------------------------------------------------------------------------
+2. ARCHIVOS:
+   - post-9-shadia-cotelo-bimba-1.jpg (Alta resolución)
+   - post-9-shadia-cotelo-bimba-2.jpg (Alta resolución)
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HAN COGIDO:
+  Publicación fijada / presentación del 28 de agosto de 2026 (Carrusel de 2 fotos):
+  https://www.instagram.com/pelucans_peluqueriacanina/p/DclCM_XjWAj/
+  Aparece Shadia Cotelo (fundadora y peluquera canina) abrazando a su perrita Bimba (Bulldog Francés) en el interior de la peluquería.
+- DÓNDE USARLAS EN LA WEB:
+  Página "Sobre Nosotros" (nosotros.html) y bloque de presentación en Inicio (index.html).
+- TEXTO ORIGINAL DE LA PUBLICACIÓN:
+  "¿Quién se esconde detrás de Pelucans? 🐾 Una cara, una historia y un amor enorme por los animales. Hola, soy Shadia Cotelo... Después de muchos años trabajando en el sector decidí montar mi propio negocio... Ella es Bimba, la razón de todo esto."
+- TEXTO / COPY RECOMENDADO PARA ACOMPAÑAR LA FOTO EN LA WEB:
+  Título: "Hola, soy Shadia Cotelo, y ella es Bimba"
+  Texto: "Detrás de Pelucans hay una vocación que nació en 2014 y un amor inmenso por los animales. Después de años formándome y trabajando como auxiliar veterinaria y peluquera canina, decidí abrir mi propio centro en A Laracha inspirada por Bimba, la verdadera razón de todo esto. En Pelucans trabajamos sin prisas, con paciencia y cariño, para que cada perro se sienta seguro y como en casa."
+
+--------------------------------------------------------------------------------
+3. ARCHIVO: post-1-deslanado-pelo-corto.jpg (Alta resolución)
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HA COGIDO:
+  Publicación del 7 de noviembre de 2026:
+  https://www.instagram.com/pelucans_peluqueriacanina/p/DfmILXjEVbX/
+  Muestra el trabajo real de deslanado con cepillo/carda profesional Artero sobre el manto de un perro de pelo corto, retirando todo el subpelo muerto.
+- DÓNDE USARLA EN LA WEB:
+  Página de Deslanado (servicio-deslanado.html) y galería de servicios (servicios.html).
+- TEXTO ORIGINAL DE LA PUBLICACIÓN:
+  "¡Aunque tengan el pelo cortito, también necesitan sus buenos deslanados! Ayudan a quitar todo ese pelo muerto que van soltando y a mantener la piel y el manto cuidados. Además, aprovechamos para echar un vistazo a las uñas y los oídos. Y sí, seguramente también se note un poquito menos de pelo por casa 😂 Porque una buena peluquería canina no es solo que salgan guapos… también es cuidar de su bienestar durante todo el proceso. 🐾✨"
+- TEXTO / COPY RECOMENDADO PARA ACOMPAÑAR LA FOTO EN LA WEB:
+  Título: "Deslanado profesional: también para perros de pelo corto"
+  Texto: "¡Aunque tengan el pelo cortito, también necesitan sus buenos deslanados! Eliminamos todo el pelo muerto acumulado para oxigenar la piel, dar brillo al manto y reducir drásticamente la caída de pelo en casa. Además, incluimos revisión completa de uñas y oídos."
+
+--------------------------------------------------------------------------------
+4. ARCHIVOS:
+   - post-4-bruce-bano-1.jpg (Alta resolución)
+   - post-4-bruce-bano-2.jpg (Alta resolución)
+   - post-3-bruce-san-bernardo-sesion.jpg (Portada del Reel de Bruce)
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HAN COGIDO:
+  - Carrusel de 2 fotos del 23 de octubre de 2026:
+    https://www.instagram.com/pelucans_peluqueriacanina/p/De1SJW8kVUb/
+  - Reel del 3 de noviembre de 2026:
+    https://www.instagram.com/pelucans_peluqueriacanina/reel/DfSzBEnvbrk/
+  Muestran a Shadia bañando y mimando a Bruce, un San Bernardo gigante, dentro de la bañera profesional de acero inoxidable de Pelucans.
+- DÓNDE USARLAS EN LA WEB:
+  Página de Baño e Hidratación del Manto (servicio-bano-manto.html) e Inicio (index.html).
+- TEXTO ORIGINAL DE LAS PUBLICACIONES:
+  - Post: "En Pelucans cogemos peludos de todos los tamaños… he aquí una muestra del trabajo que hacemos y lo bien que lo pasamos con ellos, Bruce todo lo que tiene de grande lo tiene de amoroso..."
+  - Reel: "¡Aquí tenéis la sesión completa de Bruce en la peluquería! Como es un grandullón y lleva su tiempo mimarlo como se merece, hemos pasado toda la tarde disfrutando de su compañía. 🥰 Han sido muchas horas de mimos, paciencia y cuidados para dejarlo guapísimo."
+- TEXTO / COPY RECOMENDADO PARA ACOMPAÑAR LAS FOTOS EN LA WEB:
+  Título: "Bañera adaptada para todos los tamaños (¡incluso razas gigantes!)"
+  Texto: "En Pelucans recibimos a peludos de todos los tamaños. Contamos con equipamiento profesional y reservamos todo el tiempo necesario —sin prisas ni estrés— para que incluso los grandullones como nuestro querido Bruce disfruten de una tarde de baño, masaje, secado y muchos mimos."
+
+--------------------------------------------------------------------------------
+5. ARCHIVO: post-6-orejeras-protectoras-secado.jpg (Alta resolución)
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HA COGIDO:
+  Publicación del 21 de septiembre de 2026:
+  https://www.instagram.com/pelucans_peluqueriacanina/p/Ddj_IxSDaiY/
+  Muestra a un perrito blanco con orejeras protectoras rosas puestas durante la fase de secado para aislarlo del ruido del secador.
+- DÓNDE USARLA EN LA WEB:
+  Página de Baño y Manto (servicio-bano-manto.html), Sobre Nosotros (nosotros.html) o sección de "Peluquería Sin Estrés" en index.html.
+- TEXTO ORIGINAL DE LA PUBLICACIÓN:
+  "¡Protegemos sus oídos durante el secado! En Pelucans cuidamos cada detalle para que la experiencia de nuestros peluditos sea lo más cómoda y segura posible. Estas orejeras protectoras ayudan a reducir el ruido y proteger sus oídos durante el secado..."
+- TEXTO / COPY RECOMENDADO PARA ACOMPAÑAR LA FOTO EN LA WEB:
+  Título: "Secado sin estrés con protección auditiva"
+  Texto: "Cuidamos cada detalle para que su experiencia sea tranquila y segura. Utilizamos orejeras protectoras especiales durante el secado para amortiguar el ruido del aire y relajar a los perros más sensibles o asustadizos."
+
+--------------------------------------------------------------------------------
+6. ARCHIVOS:
+   - post-7-ozono-dermocosmetica-1.jpg (Portada informativa del carrusel)
+   - post-7-ozono-dermocosmetica-2.jpg (Alta resolución - baño/piel)
+   - post-7-ozono-dermocosmetica-3.jpg (Alta resolución - revisión dermatológica)
+   - post-7-productos-psh-ozono-4.jpg (Alta resolución - Champú y acondicionador PSH Pro Health Ozone)
+   - post-7-ozono-dermocosmetica-5.jpg (Alta resolución - aplicación dermocosmética)
+   - post-5-wacho-ozonoterapia.jpg (Portada Reel de Wacho en sesión quincenal de ozono)
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HAN COGIDO:
+  - Carrusel de 5 fotos del 13 de septiembre de 2026:
+    https://www.instagram.com/pelucans_peluqueriacanina/p/DdPLG9LEZw_/
+  - Reel del 6 de octubre de 2026 (cliente Wacho):
+    https://www.instagram.com/pelucans_peluqueriacanina/reel/DeKUzOLxCmx/
+- DÓNDE USARLAS EN LA WEB:
+  Páginas de Ozonoterapia (servicio-ozonoterapia.html) y Dermocosmética (servicio-dermocosmetica.html).
+- TEXTO ORIGINAL DE LAS PUBLICACIONES:
+  - Post Ozono: "En Pelucans cuidamos la salud y el bienestar de tu mascota por encima de todo. El tratamiento que aconsejamos si tu mascota es alérgica es el de ozono; elimina bacterias, hongos, virus y parásitos externos gracias a sus propiedades. Proporciona alivio dermatológico: ayuda a tratar problemas como dermatitis, seborrea, picores, alergias y heridas leves. Mejora del pelaje: estimula la circulación sanguínea en los folículos pilosos, lo que favorece el crecimiento de pelo nuevo y aporta mayor brillo y suavidad. Eliminación de olores: neutraliza el mal olor corporal desde la raíz de la piel."
+  - Reel Wacho: "Aquí os dejamos a Wacho, fiel cliente que viene cada 15 días a su tratamiento de Ozono. Porque una buena peluquería canina no es solo que salgan guapos… también es cuidar de su bienestar durante todo el proceso. 🥰🐾"
+- TEXTO / COPY RECOMENDADO PARA ACOMPAÑAR LAS FOTOS EN LA WEB:
+  Título: "Ozonoterapia y Dermocosmética Clínica (PSH Pro Health)"
+  Texto: "Nuestro tratamiento estrella para perros con alergias, piel atópica, dermatitis, seborrea o picores. Combinamos el poder desinfectante y oxigenante del agua ozonizada con dermocosmética específica PSH Pro Health (Ozone Hard Shampoo & Sweet Conditioner):
+  • Elimina bacterias, hongos, virus y parásitos externos.
+  • Calma picores, rojeces, alergias y cicatriza heridas leves.
+  • Estimula el folículo piloso para un pelo nuevo más fuerte, suave y brillante.
+  • Neutraliza el mal olor desde la raíz de la piel.
+  Ofrecemos bonos y sesiones de mantenimiento cada 15 días, como hace nuestro fiel amigo Wacho."
+
+--------------------------------------------------------------------------------
+7. ARCHIVO: post-8-corte-tijera-maltes.jpg
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HA COGIDO:
+  Portada del Reel del 2 de septiembre de 2026:
+  https://www.instagram.com/pelucans_peluqueriacanina/reel/DczA2PexJXm/
+  Muestra el arreglo y corte de pelo de razas pequeñas (Maltés y Pequinés).
+- DÓNDE USARLA EN LA WEB:
+  Página de Corte a Tijera (servicio-corte-tijera.html).
+- TEXTO ORIGINAL DE LA PUBLICACIÓN:
+  "Más que un corte es amor y cuidado. En Pelucans cada detalle está hecho con paciencia, dedicación y mucho cariño, porque nuestros peluditos merecen sentirse tan bien como se ven 🐶💕"
+- TEXTO / COPY RECOMENDADO PARA ACOMPAÑAR LA FOTO EN LA WEB:
+  Título: "Corte a tijera y arreglo personalizado"
+  Texto: "Más que un corte, es amor y cuidado. Adaptamos cada arreglo a la morfología y estilo de tu perro con acabados a tijera llenos de paciencia, dedicación y cariño, para que se sientan tan bien como se ven."
+
+--------------------------------------------------------------------------------
+8. ARCHIVO: post-2-mastin-amor-perruno.jpg
+--------------------------------------------------------------------------------
+- DE DÓNDE SE HA COGIDO:
+  Portada del Reel del 5 de noviembre de 2026:
+  https://www.instagram.com/pelucans_peluqueriacanina/reel/DfX9Q7bxnfN/
+- DÓNDE USARLA EN LA WEB:
+  Página "Sobre Nosotros" (nosotros.html) o galería de clientes felices.
+- TEXTO ORIGINAL DE LA PUBLICACIÓN:
+  "HAY AMORES QUE NO SE PUEDEN EXPLICAR CON PALABRAS, SOLO SE PUEDEN SENTIR… Y ELLOS SON EL MEJOR EJEMPLO. Porque cuando se ama de verdad, sobran las palabras y hablan los corazones. Y nosotros… ¡nos morimos de amor por ellos! 🐶"
+
+--------------------------------------------------------------------------------
+9. PORTADAS DE HISTORIAS DESTACADAS (HIGHLIGHTS 1 A 6):
+   - highlight-1-productos.jpg  -> Destacado "PRODUCTOS" (línea de perfumes/cosmética en tienda)
+   - highlight-2-clientes.jpg   -> Destacado "CLIENTES" (secado y mimos a un American Staffordshire/Pitbull)
+   - highlight-3-vintedgo.jpg   -> Destacado "PUNTO VINTEDGO" (Bulldog con toalla: "¡Ey amigos! Ahora somos punto de recogida Vinted Go")
+   - highlight-4-servicios.jpg  -> Destacado "SERVICIOS" (Corte a tijera en manto blanco)
+   - highlight-5-horario.jpg    -> Destacado "HORARIO" (Teckel junto al cartel de horario: Mañanas 9:30-13:30, Tardes 16:00-19:00, Sábados con cita previa)
+   - highlight-6-resenas.jpg    -> Destacado "RESEÑAS" (Teckel con pajarita elegante tras su sesión)
+--------------------------------------------------------------------------------

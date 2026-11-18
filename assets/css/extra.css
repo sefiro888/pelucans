@@ -1,0 +1,19 @@
+/* Muro de fotos (galería) */
+.wall{columns:4 190px;column-gap:.9rem}
+.wall figure{margin:0 0 .9rem;break-inside:avoid;border-radius:20px;overflow:hidden;border:2px solid var(--ink);cursor:zoom-in;background:var(--sand)}
+.wall img{width:100%;height:auto;display:block;transition:transform .6s}
+.wall figure:hover img{transform:scale(1.06)}
+.p-photo.float{will-change:translate}
+@media (max-width:640px){.wall{columns:2 140px;column-gap:.6rem}.wall figure{margin-bottom:.6rem}}
+@media (max-width:1240px){.nav .open-pill{display:none}}
+div.reveal+p.reveal{margin-top:1rem}
+.vinted img{height:auto;max-height:none;object-fit:contain;max-width:380px;margin-inline:auto}
+/* barra de navegación más compacta (cabe con consejos, tema e idioma) */
+.brand{flex:none}.brand span{white-space:nowrap}
+.nav .btn{white-space:nowrap;padding:.8rem 1.2rem}
+.nav-links>a,.nav-drop>a{padding:.55rem .7rem;font-size:.95rem}
+.nav-links{gap:.1rem}
+@media (max-width:1500px){.nav .open-pill{display:none}}
+@media (max-width:1020px){.nav .btn{white-space:normal}}
+.nav-in{width:min(1360px,100% - 2rem)}
+@media (min-width:1021px){.nav-links>a[href="index.html"]{display:none}}

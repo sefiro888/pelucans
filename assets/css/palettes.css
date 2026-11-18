@@ -1,0 +1,64 @@
+/* =========================================================
+   Paletas de color · se activan con <html data-palette="…">
+   original (por defecto) · logo · mar · bosque · lila
+   ========================================================= */
+
+/* La barra translúcida sigue el color de fondo de cada paleta */
+.nav::before,[data-theme=dark] .nav::before{background:color-mix(in srgb,var(--cream) 90%,transparent)}
+.wp,.cur::before{filter:var(--paw-filter,none)}
+
+/* ---------- LOGO · solo negro, blanco y grises ---------- */
+[data-palette=logo]{--pink:#bdbdbd;--pink-d:#0d0d0d;--butter:#d6d6d6;--paw-filter:grayscale(1) contrast(1.3)}
+[data-palette=logo]:not([data-theme=dark]){--ink:#0d0d0d;--ink-2:#333;--muted:#6a6a6a;--cream:#f3f3f3;--paper:#ffffff;--sand:#e3e3e3;--pink-l:#e7e7e7;--butter-l:#ececec;--sage:#dcdcdc;--sky:#e4e4e4;--line:rgba(0,0,0,.16);--edge:#0d0d0d;--on-ink:#fff}
+[data-palette=logo][data-theme=dark]{--cream:#121212;--paper:#1b1b1b;--sand:#262626;--pink-l:#2c2c2c;--butter-l:#333;--sage:#262626;--sky:#2a2a2a;--edge:#7a7a7a;--bg:#121212}
+[data-palette=logo] .btn.wa,[data-palette=logo] .fab,[data-palette=logo] .mbar a:last-child{background:var(--ink);color:var(--on-ink);--tail:var(--ink)}
+[data-palette=logo] .fab::before{border-color:var(--ink)}
+[data-palette=logo] .stars,[data-palette=logo] .proof .stars{color:var(--ink)}
+[data-palette=logo] .live-tag{background:var(--ink);color:var(--on-ink)}
+[data-palette=logo] .open-pill[data-state=open]::before{background:var(--ink);box-shadow:none;animation:none}
+[data-palette=logo] .open-pill[data-state=cita]::before{background:#8a8a8a}
+[data-palette=logo] .eyebrow,[data-palette=logo] .hero h1 em,[data-palette=logo] main section:nth-of-type(3n+2) h2 em{color:var(--ink)}
+[data-palette=logo] .hl{background:linear-gradient(transparent 62%,#d6d6d6 62% 92%,transparent 92%)}
+[data-palette=logo] .scribble::after{filter:grayscale(1) brightness(.2)}
+[data-palette=logo] .band{background:#d6d6d6}
+[data-palette=logo] .band.pink{background:#bdbdbd}
+[data-palette=logo] .story-cta a,[data-palette=logo] .reel .play,[data-palette=logo] .ba-ctrl button,[data-palette=logo] .x{color:#0d0d0d}
+[data-palette=logo][data-theme=dark] .cta,[data-palette=logo][data-theme=dark] .band,[data-palette=logo][data-theme=dark] .sticker,[data-palette=logo][data-theme=dark] .stick,[data-palette=logo][data-theme=dark] .price,[data-palette=logo][data-theme=dark] .c-note{color:#0d0d0d}
+[data-palette=logo][data-theme=dark] .eyebrow,[data-palette=logo][data-theme=dark] .hero h1 em,[data-palette=logo][data-theme=dark] main section:nth-of-type(3n+2) h2 em{color:var(--ink)}
+[data-palette=logo] .rev .av,[data-palette=logo] .faq summary i{background:var(--ink);color:var(--on-ink)}
+[data-palette=logo] .c-badge svg circle{fill:#bdbdbd}
+[data-palette=logo] .amap .m-route{stroke:#0d0d0d}
+
+/* ---------- MAR · azul marino, coral y arena ---------- */
+[data-palette=mar]{--pink:#ff7a59;--pink-d:#e0482a;--butter:#ffd166;--paw-filter:hue-rotate(28deg) saturate(1.2)}
+[data-palette=mar]:not([data-theme=dark]){--ink:#10253a;--ink-2:#34495e;--muted:#5f7387;--cream:#f5f0e6;--paper:#fffaf2;--sand:#ebe3d3;--pink-l:#ffd9cf;--butter-l:#ffeab3;--sage:#cfe8dc;--sky:#bfe1f2;--edge:#10253a;--line:rgba(16,37,58,.15)}
+[data-palette=mar][data-theme=dark]{--cream:#0f1c2b;--paper:#162838;--sand:#1d3347;--pink-l:#4a2a26;--butter-l:#4a3f1d;--sage:#26403a;--sky:#1f3a4d;--edge:#4f6b84;--bg:#0f1c2b}
+
+/* ---------- BOSQUE · verde, terracota y mantequilla ---------- */
+[data-palette=bosque]{--pink:#e8825a;--pink-d:#c4572e;--butter:#f2c94c;--paw-filter:hue-rotate(38deg) saturate(1.1)}
+[data-palette=bosque]:not([data-theme=dark]){--ink:#14281d;--ink-2:#33473a;--muted:#5c6f62;--cream:#f1efe3;--paper:#fbf9ef;--sand:#e4e0cd;--pink-l:#f6d3c2;--butter-l:#f8e7a6;--sage:#c3dcb9;--sky:#cfe5df;--edge:#14281d;--line:rgba(20,40,29,.15)}
+[data-palette=bosque][data-theme=dark]{--cream:#101a14;--paper:#172319;--sand:#1f2e23;--pink-l:#4a2e24;--butter-l:#4a421c;--sage:#2b4026;--sky:#243e3a;--edge:#5b7563;--bg:#101a14}
+
+/* ---------- LILA · violeta y melocotón ---------- */
+[data-palette=lila]{--pink:#b58cff;--pink-d:#7a45e0;--butter:#ffcf8a;--paw-filter:hue-rotate(-60deg) saturate(1.1)}
+[data-palette=lila]:not([data-theme=dark]){--ink:#251a38;--ink-2:#4a3d63;--muted:#76698d;--cream:#f7f0f3;--paper:#fffafc;--sand:#ece0e6;--pink-l:#e6d9ff;--butter-l:#ffe6c4;--sage:#cfe9dd;--sky:#c9dcff;--edge:#251a38;--line:rgba(37,26,56,.15)}
+[data-palette=lila][data-theme=dark]{--cream:#181226;--paper:#211a33;--sand:#2a2140;--pink-l:#3b2b5a;--butter-l:#4a3a22;--sage:#27403a;--sky:#26365a;--edge:#6f5f92;--bg:#181226}
+[data-palette=mar][data-theme=dark] .eyebrow,[data-palette=mar][data-theme=dark] .hero h1 em,[data-palette=bosque][data-theme=dark] .eyebrow,[data-palette=bosque][data-theme=dark] .hero h1 em,[data-palette=lila][data-theme=dark] .eyebrow,[data-palette=lila][data-theme=dark] .hero h1 em{color:var(--pink)}
+
+/* ---------- Selector de paleta ---------- */
+.pal{position:relative}
+.pal-toggle{width:44px;height:44px;border-radius:50%;border:2px solid var(--edge);background:var(--paper);display:grid;place-items:center;font-size:1.15rem;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.pal-toggle:hover{transform:rotate(-20deg) scale(1.08)}
+.pal-pop{position:absolute;right:-60px;top:calc(100% + 12px);width:min(300px,86vw);background:var(--paper);border:2px solid var(--edge);border-radius:22px;box-shadow:6px 6px 0 var(--edge);padding:.6rem;display:grid;gap:.2rem;opacity:0;visibility:hidden;translate:0 8px;transition:.22s;z-index:80}
+.pal.open .pal-pop{opacity:1;visibility:visible;translate:0 0}
+.pal-pop button{display:flex;align-items:center;gap:.8rem;background:none;border:0;border-radius:14px;padding:.6rem .7rem;text-align:left;width:100%}
+.pal-pop button:hover{background:var(--butter-l)}
+.pal-pop button[aria-checked=true]{background:var(--pink-l);outline:2px solid var(--edge)}
+.pal-pop b{display:block;line-height:1.1}.pal-pop small{color:var(--muted)}
+.sw{flex:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--edge);background:conic-gradient(var(--a) 0 33%,var(--b) 0 66%,var(--c) 0)}
+@media (max-width:1020px){.pal-pop{position:fixed;left:1rem;right:1rem;top:auto;bottom:5rem;width:auto}}
+
+/* Detalles: el modo oscuro respeta cada paleta */
+[data-theme=dark] .blob.b1{background:var(--pink-l)}
+[data-theme=dark] .blob.b2{background:var(--butter-l)}
+[data-palette=logo][data-theme=dark]{--ink:#f2f2f2;--ink-2:#cfcfcf;--muted:#9a9a9a;--on-ink:#0d0d0d}

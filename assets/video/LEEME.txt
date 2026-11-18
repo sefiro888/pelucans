@@ -1,0 +1,3 @@
+Si Shadia pasa un vídeo corto (5-10 s, sin sonido, vertical o cuadrado, máx. 4 MB),
+guárdalo aquí como portada.mp4 y ejecuta  python build.py :
+se reproducirá en bucle dentro del arco de la portada.
