@@ -1,0 +1,23 @@
+/* =========================================================
+   Contraste en modo oscuro: el color de acento (--pink-d) se usa para letras
+   y detalles, así que en oscuro debe ser claro en TODAS las paletas.
+   ========================================================= */
+[data-theme=dark]{--pink-d:#ff8fb3}
+[data-palette=logo][data-theme=dark]{--pink-d:#f2f2f2;--pink:#bdbdbd}
+[data-palette=mar][data-theme=dark]{--pink-d:#ff9b80}
+[data-palette=bosque][data-theme=dark]{--pink-d:#f4a37c}
+[data-palette=lila][data-theme=dark]{--pink-d:#cdb0ff}
+
+/* y en claro, el acento nunca debe quedar más pálido que el texto */
+[data-palette=logo]:not([data-theme=dark]){--pink-d:#0d0d0d}
+
+/* WhatsApp: verde más profundo para que el texto blanco se lea bien (≥ 4,5:1) */
+.btn.wa,.fab,.mbar a:last-child{background:#16803f;color:#fff}
+.btn.wa{--tail:#16803f}
+.fab::before{border-color:#16803f}
+/* estrellas de valoración legibles sobre fondos claros */
+.stars,.proof .stars{color:#b86f00}
+[data-theme=dark] .stars,[data-theme=dark] .proof .stars{color:#f5b82e}
+
+/* etiquetas de precio en paleta logo + oscuro */
+[data-palette=logo][data-theme=dark] .pro .price{color:var(--ink)}
