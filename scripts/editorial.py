@@ -88,12 +88,32 @@ def panorama(body, file, photo, services, wa):
     summary = lead.decode_contents() if lead else 'Conoce Pelucans: cuidados a medida, atención individual y tiempo para tu peludo.'
     if file == 'index.html': summary = 'Con Shadia, cada perro tiene su momento. Peluquería canina en A Laracha: uno a uno, sin jaulas y con todo el tiempo que necesita.'
     specific = next((s for s in services if file == 'servicio-'+s['slug']+'.html'), None)
-    # Las imágenes horizontales aportadas se reservan para los servicios sin toma real específica.
-    photo_map = {'index.html':('shadia-bimba-1','70% 35%'), 'nosotros.html':('shadia-bimba-2','72% 30%'),
-      'servicios.html':('bruce-bano-2','75% 38%'), 'contacto.html':('fachada','center'),
-      'galeria.html':('cliente-80','70% 30%'), 'servicio-bano-manto.html':('bruce-bano-1','70% 65%'), 'tienda.html':('psh-ozone','75% 50%')}
-    source, pos = photo_map.get(file,(photo,'72% 38%'))
-    header = f'''<header class="page-hero cinematic-hero {'cinematic-home' if file=='index.html' else ''}" style="--hero-pos:{pos}"><img class="panorama-image" src="assets/img/real/{source}.webp" alt="" fetchpriority="high" decoding="async"><div class="panorama-shade"></div><div class="wrap panorama-content">{str(crumbs) if crumbs else ''}<div class="panorama-copy"><span class="eyebrow">{eyebrow.decode_contents() if eyebrow else 'Pelucans · A Laracha'}</span><h1>{title}</h1><p class="lead">{summary}</p>{actions}</div><div class="panorama-foot"><span>PELUCANS · A LARACHA</span><span>Atención individual · Cita previa</span></div></div></header>'''
+    # Solo fotografías reales. El punto focal se elige según las cabezas de cada toma.
+    photo_map = {
+        'index.html':('cliente-80','center 50%'),
+        'nosotros.html':('shadia-bimba-1','center top'),
+        'servicios.html':('bruce-bano-2','center 35%'),
+        'contacto.html':('fachada','center 40%'),
+        'galeria.html':('cliente-80','center 42%'),
+        'tienda.html':('story-colonias','center 15%'),
+        'servicio-corte-tijera.html':('cliente-16','center 42%'),
+        'servicio-stripping.html':('cliente-20','center 20%'),
+        'servicio-deslanado.html':('cliente-41','center 35%'),
+        'servicio-ozonoterapia.html':('ozono-shadia-wacho','center 40%'),
+        'servicio-dermocosmetica.html':('psh-ozone','center top'),
+        'servicio-bano-manto.html':('bruce-bano-2','center 35%'),
+        'servicio-corte-unas.html':('cliente-46','center 22%'),
+        'servicio-comida-especializada.html':('fachada','center 40%'),
+        'servicio-asesoramiento.html':('ozono-shadia-wacho','center 40%'),
+        'consejos.html':('orejeras','center 35%'),
+        'consejo-cepillado.html':('cliente-41','center 35%'),
+        'consejo-muda.html':('cliente-20','center 20%'),
+        'consejo-primera-visita.html':('bruce-bano-2','center 35%'),
+        '404.html':('fachada','center 40%'),
+    }
+    source, pos = photo_map.get(file,(photo,'center 35%'))
+    image_src = f'assets/img/real/{source}.webp'
+    header = f'''<header class="page-hero cinematic-hero {'cinematic-home' if file=='index.html' else ''}" style="--hero-pos:{pos}"><img class="panorama-image" src="{image_src}" alt="" fetchpriority="high" decoding="async"><div class="panorama-shade"></div><div class="wrap panorama-content">{str(crumbs) if crumbs else ''}<div class="panorama-copy"><span class="eyebrow">{eyebrow.decode_contents() if eyebrow else 'Pelucans · A Laracha'}</span><h1>{title}</h1><p class="lead">{summary}</p>{actions}</div><div class="panorama-foot"><span>PELUCANS · A LARACHA</span><span>Atención individual · Cita previa</span></div></div></header>'''
     rest = body[end + 10:]
     if specific:
         # La guía se sitúa antes de las preguntas, sin duplicar la explicación inicial.

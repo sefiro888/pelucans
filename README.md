@@ -11,12 +11,12 @@ Para regenerar: instalar `requirements.txt`, ejecutar `python build.py` y `pytho
 
 ## Cabeceras y contenido
 
-Todas las páginas tienen una cabecera a todo el ancho con introducción y contraste para el texto. Las fotos se muestran completas con `object-fit: contain`, sin recortar cabezas; en ordenador se combinan con un fondo negro y una transición lateral. Las nueve fichas incluyen explicación, beneficios, destinatarios, proceso, guía antes/durante/después, recomendaciones para reservar, preguntas y cuidados relacionados.
+Todas las páginas tienen una cabecera a todo el ancho con introducción y contraste para el texto. Las cabeceras usan fotografías reales como fondo de borde a borde con `object-fit: cover`, puntos focales por página y texto superpuesto sobre un degradado. Se ha eliminado la composición de fotografía lateral. Las nueve fichas incluyen explicación, beneficios, destinatarios, proceso, guía antes/durante/después, recomendaciones para reservar, preguntas y cuidados relacionados.
 
 ## Interacciones nuevas
 
 - Menú de servicios con nueve iconos SVG propios y categorías.
-- Pasos interactivos accesibles mediante clic, flechas del teclado, Inicio/Fin y controles anterior/siguiente.
+- Proceso con una fotografía real y cuatro momentos desplegables, accesibles con teclado. Se ha retirado el panel de pestañas y la ilustración vacía de la huella.
 - Cuatro reels públicos descargados y reproducidos como MP4 propios, sin interfaz de Instagram, en un marco de móvil. Hay un reproductor en cada ficha. Solo reproduce uno a la vez y se pausa al salir de pantalla. Las escenas generales no se describen como vídeos de una técnica específica.
 - Titular con amor / paciencia / mimos y subrayado vectorial dibujado. Respeta movimiento reducido y mantiene una lectura accesible estable.
 - Fundido entre páginas con una huella propia inspirada en el logo.
@@ -66,3 +66,7 @@ El detalle de la solicitud y su estado se conserva en `MEJORAS-PENDIENTES.md`.
 ## Publicación verificada
 
 Repositorio público: https://github.com/sefiro888/pelucans. GitHub Pages sirve desde `main`, raíz `/`. Se han comprobado 38 páginas públicas actualizadas y 103 recursos (imágenes, vídeos, CSS y JavaScript) con respuesta HTTP 200. El vídeo de corte a tijera se ha reproducido completo desde el enlace público.
+
+## Corrección solicitada tras la revisión visual
+
+Se sustituyó el panel de pasos por una composición editorial con fotos reales. Las 40 páginas ES/GL usan ahora imágenes de fondo a todo el ancho y texto encima. No se añadieron imágenes de IA: las cabeceras emplean exclusivamente fotos del salón y sus clientes, con puntos focales por página. Las imágenes generadas de la carpeta original `img/` no forman parte de esta publicación. Comprobadas 40 combinaciones de página y tamaño (1440/390 px) sin desbordamiento ni solapamientos del contenido de cabecera.

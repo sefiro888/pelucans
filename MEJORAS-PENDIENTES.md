@@ -37,3 +37,9 @@ La parte de implementación del muro está terminada; su activación real depend
 - 103 recursos públicos con respuesta HTTP 200.
 - Foto principal cargada y vídeo MP4 reproducido hasta sus 27 segundos desde GitHub Pages.
 - La sincronización de Behold es la única activación externa pendiente; el usuario aún no tiene feed.
+
+## Corrección posterior de dirección visual
+- [x] Cabeceras fotográficas de borde a borde con texto superpuesto, sin foto lateral.
+- [x] Usar exclusivamente fotos reales de Pelucans en las cabeceras.
+- [x] Retirar el panel de pestañas y la huella de los pasos; sustituirlo por fotografía real y momentos desplegables.
+- [x] Verificar las 20 páginas en ordenador y móvil.

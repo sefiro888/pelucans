@@ -26,6 +26,33 @@ def write_assets(root):
 
 def decorate(body,file,root):
     soup=BeautifulSoup(body,'html.parser')
+    # Proceso editorial: fotografía real y cuatro momentos desplegables.
+    process_photos = {
+        'corte-tijera':'cliente-16', 'stripping':'cliente-20', 'deslanado':'deslanado',
+        'ozonoterapia':'ozono-shadia-wacho','dermocosmetica':'psh-ozone',
+        'bano-manto':'bruce-bano-2','corte-unas':'cliente-46',
+        'comida-especializada':'cat-colonias','asesoramiento':'shadia-bimba-2',
+    }
+    slug=file.removeprefix('servicio-').removesuffix('.html')
+    process_image=process_photos.get(slug,'bruce-bano-2')
+    for group in list(soup.select('.steps, .s-steps')):
+        items=[(item.select_one('h3'),item.select_one('p')) for item in group.find_all(['article','li'],recursive=False)]
+        items=[(title.get_text(' ',strip=True),text.get_text(' ',strip=True)) for title,text in items if title and text]
+        if not items: continue
+        layout=soup.new_tag('div',attrs={'class':'session-story'})
+        figure=soup.new_tag('figure',attrs={'class':'session-story-photo'})
+        photo=soup.new_tag('img',attrs={'src':f'assets/img/real/{process_image}.webp','alt':'Un momento de cuidado en Pelucans','loading':'lazy','decoding':'async'})
+        figure.append(photo)
+        caption=soup.new_tag('figcaption');caption.string='Cada perro marca su ritmo.';figure.append(caption)
+        moments=soup.new_tag('div',attrs={'class':'session-moments'})
+        for index,(title,text) in enumerate(items):
+            detail=soup.new_tag('details',attrs={'class':'session-moment'})
+            if index==0: detail['open']=''
+            summary=soup.new_tag('summary');label=soup.new_tag('h3');label.string=title
+            plus=soup.new_tag('span',attrs={'aria-hidden':'true','class':'moment-plus'});plus.string='+'
+            summary.append(label);summary.append(plus);detail.append(summary)
+            paragraph=soup.new_tag('p');paragraph.string=text;detail.append(paragraph);moments.append(detail)
+        layout.append(figure);layout.append(moments);group.replace_with(layout)
     # El titular conserva su lectura accesible mientras rota la palabra visual.
     if file=='index.html':
         title=soup.select_one('.panorama-copy h1')
