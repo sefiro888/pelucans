@@ -80,3 +80,7 @@ Se sustituyó el panel de pasos por una composición editorial con fotos reales.
 - Dimensiones reales en las imágenes para reducir saltos de contenido durante la carga.
 - Revisión en navegador: 40 páginas ES/GL a 320 px, más portada, contacto, servicios y galería a 390/768/1024/1440 px. Detectados y corregidos los dos desbordamientos indicados.
 - La prueba es de navegador con tamaños de pantalla; no equivale a una prueba física en iPhone y Android.
+
+### Cierre de publicación
+La versión publicada se comprobó con 72 combinaciones de página y ancho (320, 360, 390, 430, 768, 1024, 1100, 1280 y 1440 px), sin desbordamientos, imágenes rotas cargadas ni solapamientos de la introducción con el pie de cabecera. Las 40 páginas se recorrieron a 320 px; en los demás anchos se probaron portada, contacto, servicios y galería.
+Comprobación pública: 40 páginas y 101 recursos devuelven HTTP 200. MP4 público de corte a tijera cargado (27,118 s), listo y avanzando hasta 7,7 s en la comprobación móvil. Capturas de la revisión en la carpeta local `preview/` (ignorada por Git).
