@@ -57,3 +57,12 @@ La parte de implementación del muro está terminada; su activación real depend
 ### Cierre de publicación
 La versión publicada se comprobó con 72 combinaciones de página y ancho (320, 360, 390, 430, 768, 1024, 1100, 1280 y 1440 px), sin desbordamientos, imágenes rotas cargadas ni solapamientos de la introducción con el pie de cabecera. Las 40 páginas se recorrieron a 320 px; en los demás anchos se probaron portada, contacto, servicios y galería.
 Comprobación pública: 40 páginas y 101 recursos devuelven HTTP 200. MP4 público de corte a tijera cargado (27,118 s), listo y avanzando hasta 7,7 s en la comprobación móvil. Capturas de la revisión en la carpeta local `preview/` (ignorada por Git).
+
+## Selección 21, 15, 6, 24, 1 · 19/11/2026
+- [x] 21: calendario estacional interactivo en Consejos y acceso desde Inicio.
+- [x] 15: guía de sensibilidad al secador, enlazada desde el baño.
+- [x] 6: sección editorial de fotografías reales de manos y herramientas en Inicio y Servicios.
+- [x] 24: artículo con seis mitos desplegables y fuentes para ampliar.
+- [x] Contenidos ES/GL y revisión de 60 combinaciones de las seis páginas nuevas o ampliadas, en 320/390/768/1100/1440 px. Sin desbordamientos ni solapamientos de cabecera. Calendario probado en las cuatro estaciones, flechas, Home y End; mitos abiertos en móvil.
+- [x] 1, preparación: soporte de fotos de cabecera específicas para ordenador y móvil. Sin modificar las fotos reales mediante IA.
+- [ ] 1, fotografía nueva: pendiente una sesión real de tomas horizontales hechas expresamente. Pautas de encuadre y nombres de archivo en README.md. No se afirma que se hayan tomado fotos nuevas.

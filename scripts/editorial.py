@@ -1,6 +1,7 @@
 """Cabeceras panorámicas y guías de mantenimiento específicas por servicio."""
 from bs4 import BeautifulSoup
 from html import escape
+from pathlib import Path
 
 GUIDES = {
  'corte-tijera': ('Un acabado bonito que puedas mantener',
@@ -109,11 +110,21 @@ def panorama(body, file, photo, services, wa):
         'consejo-cepillado.html':('cliente-41','center 35%'),
         'consejo-muda.html':('cliente-20','center 20%'),
         'consejo-primera-visita.html':('bruce-bano-2','center 35%'),
+        'consejo-secador-sin-miedo.html':('orejeras','center 30%'),
+        'consejo-mitos-del-manto.html':('deslanado','center 42%'),
         '404.html':('fachada','center 40%'),
     }
     source, pos = photo_map.get(file,(photo,'center 35%'))
     image_src = f'assets/img/real/{source}.webp'
-    header = f'''<header class="page-hero cinematic-hero {'cinematic-home' if file=='index.html' else ''}" style="--hero-pos:{pos}"><img class="panorama-image" src="{image_src}" alt="" fetchpriority="high" decoding="async"><div class="panorama-shade"></div><div class="wrap panorama-content">{str(crumbs) if crumbs else ''}<div class="panorama-copy"><span class="eyebrow">{eyebrow.decode_contents() if eyebrow else 'Pelucans · A Laracha'}</span><h1>{title}</h1><p class="lead">{summary}</p>{actions}</div><div class="panorama-foot"><span>PELUCANS · A LARACHA</span><span>Atención individual · Cita previa</span></div></div></header>'''
+    # Variantes reales específicas: se activan al añadir la sesión fotográfica.
+    asset_root=Path(__file__).resolve().parent.parent
+    desktop=f'assets/img/headers/{file.removesuffix(".html")}-desktop.webp'
+    mobile=f'assets/img/headers/{file.removesuffix(".html")}-mobile.webp'
+    sources=''
+    if (asset_root/desktop).is_file(): sources+=f'<source media="(min-width: 801px)" srcset="{desktop}">'
+    if (asset_root/mobile).is_file(): sources+=f'<source media="(max-width: 800px)" srcset="{mobile}">'
+    photo_markup=f'<picture>{sources}<img class="panorama-image" src="{image_src}" alt="" fetchpriority="high" decoding="async"></picture>'
+    header = f'''<header class="page-hero cinematic-hero {'cinematic-home' if file=='index.html' else ''}" style="--hero-pos:{pos}">{photo_markup}<div class="panorama-shade"></div><div class="wrap panorama-content">{str(crumbs) if crumbs else ''}<div class="panorama-copy"><span class="eyebrow">{eyebrow.decode_contents() if eyebrow else 'Pelucans · A Laracha'}</span><h1>{title}</h1><p class="lead">{summary}</p>{actions}</div><div class="panorama-foot"><span>PELUCANS · A LARACHA</span><span>Atención individual · Cita previa</span></div></div></header>'''
     rest = body[end + 10:]
     if specific:
         # La guía se sitúa antes de las preguntas, sin duplicar la explicación inicial.

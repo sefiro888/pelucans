@@ -84,3 +84,15 @@ Se sustituyó el panel de pasos por una composición editorial con fotos reales.
 ### Cierre de publicación
 La versión publicada se comprobó con 72 combinaciones de página y ancho (320, 360, 390, 430, 768, 1024, 1100, 1280 y 1440 px), sin desbordamientos, imágenes rotas cargadas ni solapamientos de la introducción con el pie de cabecera. Las 40 páginas se recorrieron a 320 px; en los demás anchos se probaron portada, contacto, servicios y galería.
 Comprobación pública: 40 páginas y 101 recursos devuelven HTTP 200. MP4 público de corte a tijera cargado (27,118 s), listo y avanzando hasta 7,7 s en la comprobación móvil. Capturas de la revisión en la carpeta local `preview/` (ignorada por Git).
+
+## Selección de mejoras 21, 15, 6, 24 y 1
+- Calendario de cuatro estaciones en Consejos: selección de estación según el mes en Madrid, navegación con flechas/Home/End y contenido accesible sin JavaScript. Orientación, no una pauta de citas ni una fecha universal de muda.
+- Guía propia para sensibilidad al secador y enlace desde Baño y cuidado del manto.
+- Seis mitos desplegables con enlaces a fuentes de bienestar animal.
+- Tres fotografías reales de manos, herramienta de cepillado y preparación del secado, en Inicio y Servicios. No se han generado fotografías con IA.
+- Nuevos contenidos ES/GL; dos artículos nuevos por idioma.
+
+### Fotografías de cabecera: preparación y toma pendiente
+Las fotografías hechas expresamente requieren una nueva sesión real en el salón. La integración de variantes ya está preparada: colocar archivos WebP en `assets/img/headers/`, con el nombre de la página sin `.html` seguido de `-desktop.webp` o `-mobile.webp`, y ejecutar `python build.py`. Ejemplo: `nosotros-desktop.webp` y `nosotros-mobile.webp`. Si no existen, se conserva la foto real actual. El navegador elige la variante adecuada y mantiene la cabecera a todo el ancho.
+
+Para la sesión: tomas horizontales de al menos 2400 × 1400 px, espacio tranquilo a la izquierda para el texto y personas/perros a la derecha, con margen sobre la cabeza. Fotografiar también una variante vertical para móvil y dejar aire alrededor del sujeto. Priorizar Shadia y Bimba, baño con Bruce, corte con manos y tijeras visibles, cepillado, bienvenida y fachada. No se propone sustituir esas tomas por imágenes generadas. Las fotografías actuales proceden del material ya aportado.

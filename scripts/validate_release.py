@@ -12,8 +12,8 @@ for page in pages:
     if len(soup.select('h1'))!=1:issues.append(f'{page.name}: H1 incorrecto')
     if len(soup.select('main>header.page-hero'))!=1:issues.append(f'{page.name}: falta cabecera panorámica')
     if page.parent.name=='gl' and soup.html.get('lang')!='gl':issues.append(f'{page}: idioma incorrecto')
-    for node in soup.select('[src],[href],[poster]'):
-        for attr in ('src','href','poster'):
+    for node in soup.select('[src],[href],[poster],[srcset]'):
+        for attr in ('src','href','poster','srcset'):
             raw=node.get(attr)
             if not raw:continue
             url=urlsplit(raw)

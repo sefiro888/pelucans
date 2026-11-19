@@ -85,3 +85,32 @@
   // Cierre del megamenú al salir de él, sin cerrar mientras se navega con teclado.
   document.addEventListener('click',event=>{if(event.target.closest('.nav-drop'))return;document.querySelectorAll('.nav-drop.open').forEach(menu=>{menu.classList.remove('open');menu.querySelector('button')?.setAttribute('aria-expanded','false');});});
 })();
+/* Calendario accesible: todo el contenido sigue disponible sin JavaScript. */
+(() => {
+  document.querySelectorAll('.season-journal').forEach(section=>{
+    const tabs=[...section.querySelectorAll('[role=tab]')];
+    const panels=[...section.querySelectorAll('.season-panel')];
+    const list=section.querySelector('[role=tablist]');
+    if(!list||tabs.length!==panels.length)return;
+    function activate(index,focus=false){
+      tabs.forEach((tab,i)=>{tab.setAttribute('aria-selected',String(i===index));tab.tabIndex=i===index?0:-1;panels[i].hidden=i!==index;});
+      if(focus)tabs[index].focus();
+    }
+    tabs.forEach((tab,i)=>{
+      panels[i].setAttribute('role','tabpanel');panels[i].setAttribute('aria-labelledby',tab.id);panels[i].tabIndex=0;
+      tab.addEventListener('click',()=>activate(i));
+      tab.addEventListener('keydown',event=>{
+        let next=i;
+        if(event.key==='ArrowRight')next=(i+1)%tabs.length;
+        else if(event.key==='ArrowLeft')next=(i+tabs.length-1)%tabs.length;
+        else if(event.key==='Home')next=0;
+        else if(event.key==='End')next=tabs.length-1;
+        else return;
+        event.preventDefault();activate(next,true);
+      });
+    });
+    const month=Number(new Intl.DateTimeFormat('en',{month:'numeric',timeZone:'Europe/Madrid'}).format(new Date()));
+    activate(month>=3&&month<=5?0:month>=6&&month<=8?1:month>=9&&month<=11?2:3);
+    list.hidden=false;
+  });
+})();

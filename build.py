@@ -13,6 +13,8 @@ sys.path.insert(0, str(ROOT / 'scripts'))
 from content import SERVICES  # noqa: E402
 from posts import POSTS  # noqa: E402
 import i18n  # noqa: E402
+from care_journal import EXTRA_POSTS, TRANSLATIONS, enhance
+POSTS.extend(EXTRA_POSTS)
 from editorial import panorama
 from atelier import decorate, service_icon, write_assets, PAW
 write_assets(ROOT)
@@ -175,7 +177,9 @@ def footer():
 def page(file, title, description, body, active='', og='fachada', home=False, cls='pro', ld=None):
     CUR['file'] = file
     body = panorama(body, file, og, SERVICES, wa)
+    body = enhance(body, file)
     body = decorate(body, file, ROOT)
+    i18n.GL.update(TRANSLATIONS)
     if SITE_URL:
         canon = f'<link rel="canonical" href="{SITE_URL}{file}">'
         ogurl = f'<meta property="og:url" content="{SITE_URL}{file}">'
@@ -278,14 +282,14 @@ def area_map():
 
 def advice_page():
     body = f"""<section class="p-hero"><div class="paw-bg"></div><div class="wrap p-hero-grid"><div><nav class="crumbs" aria-label="Migas"><a href="index.html">Inicio</a> / <span>Consejos</span></nav><span class="eyebrow">El rincón de Shadia</span><h1>Consejos para<br>su <em class="scribble">día a día.</em></h1><p class="lead">Cepillado, muda, primera visita… Guías cortas y claras para cuidar su manto en casa. Siempre con un recordatorio: ante cualquier duda de salud, su veterinario.</p><div class="hero-cta">{btn('Preguntarle a Shadia')}</div></div><div class="p-photo float">{img('cliente-41', 'Un border collie mirando a cámara en Pelucans', lazy=False)}<span class="sticker">aprende un truco</span></div></div></section>"""
-    body += f'<section class="section"><div class="wrap">{sec_head("Del salón a tu casa", "Tres guías<br>para <em>empezar.</em>")}{blog_cards()}</div></section>'
+    body += f'<section class="section"><div class="wrap">{sec_head("Del salón a tu casa", "Cinco guías<br>para <em>cuidarlo.</em>")}{blog_cards()}</div></section>'
     body += quiz_block()
     body += cta('Hola Shadia, tengo una duda sobre el cuidado de mi perro.', '¿Tienes una duda <em>concreta?</em>')
     page('consejos.html', 'Consejos de cuidado canino', 'Consejos de Shadia, groomer en A Laracha: cómo cepillar a tu perro, cómo llevar la muda y cómo preparar la primera visita a la peluquería canina.', body, 'consejos', 'cliente-41')
 
 def advice_post_pages():
     for i, x in enumerate(POSTS):
-        others = [y for y in POSTS if y['slug'] != x['slug']]
+        others = [y for y in POSTS if y['slug'] != x['slug']][:3]
         body = f"""<section class="p-hero"><div class="paw-bg"></div><div class="wrap p-hero-grid"><div><nav class="crumbs" aria-label="Migas"><a href="index.html">Inicio</a> / <a href="consejos.html">Consejos</a> / <span>{x['tag']}</span></nav><span class="eyebrow">{x['tag']} · {x['mins']} min de lectura</span><h1 style="font-size:clamp(2.2rem,5vw,4.2rem)">{x['title']}</h1><p class="lead">{x['excerpt']}</p></div><div class="p-photo float">{img(x['img'], x['title'], lazy=False, pos=x['pos'])}</div></div></section>
 <section class="section tint"><div class="wrap"><article class="article">{x['body']}<figure>{img(x['img2'], 'Imagen del salón de Pelucans', pos='center 30%')}<figcaption>Del día a día en Pelucans.</figcaption></figure><div class="note">{icon('heart-fill')}<span>Estos consejos son orientativos. Cada perro es distinto: si tienes dudas, escríbenos y lo vemos con su manto delante.</span></div><div style="margin-top:1.6rem">{btn('Consultar a Shadia', 'Hola Shadia, he leído el consejo «' + x['title'] + '» y tengo una pregunta.')}</div></article></div></section>
 <section class="section"><div class="wrap">{sec_head('Sigue leyendo', 'Más <em>consejos.</em>')}{blog_cards(others)}</div></section>""" + cta()
@@ -391,4 +395,4 @@ def seo_files():
 home_page(); services_page(); shop_page(); gallery_page(); about_page(); contact_page(); advice_page(); advice_post_pages(); not_found(); seo_files()
 for i, s in enumerate(SERVICES): service_page(s, i)
 n = i18n.report()
-print('Generadas 19 páginas (+19 en gallego). Textos pendientes de traducir:', n)
+print('Generadas', len(list(ROOT.glob('*.html'))), 'páginas por idioma. Textos pendientes de traducir:', n)
