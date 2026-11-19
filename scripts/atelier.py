@@ -1,6 +1,13 @@
 """Identidad vectorial, navegación y reproductores propios de Pelucans."""
 from pathlib import Path
 from bs4 import BeautifulSoup
+from functools import lru_cache
+from PIL import Image
+
+@lru_cache(maxsize=256)
+def image_size(path):
+    with Image.open(path) as image:
+        return image.size
 
 PATHS = {
  'corte-tijera':'<circle cx="8" cy="23" r="4"/><circle cx="23" cy="23" r="4"/><path d="m11 20 15-16M20 20 6 4M16 14l3 3"/>',
@@ -76,9 +83,7 @@ def decorate(body,file,root):
         video=soup.new_tag('video',attrs={'class':'native-film','playsinline':'','preload':'none','controls':'','poster':poster['src'] if poster else '', 'aria-label':label})
         source=soup.new_tag('source',attrs={'src':f'assets/video/{code}.mp4','type':'video/mp4'})
         video.append(source)
-        play=soup.new_tag('button',attrs={'class':'film-play','type':'button','aria-label':'Reproducir: '+label})
-        play.append(BeautifulSoup('<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 4 13 8L8 20Z" fill="currentColor"/></svg>','html.parser'))
-        shell.append(video);shell.append(play);figure.append(shell)
+        shell.append(video);figure.append(shell)
         cap=soup.new_tag('figcaption');cap.string=label;figure.append(cap)
         button.replace_with(figure)
     # Texto coherente con el reproductor nuevo.
@@ -91,4 +96,11 @@ def decorate(body,file,root):
         divider=soup.new_tag('div',attrs={'class':'brand-divider','aria-hidden':'true'})
         divider.append(BeautifulSoup(PAW,'html.parser'))
         section.insert_before(divider)
+    for image in soup.select('img[src]'):
+        source=image.get('src','')
+        if not source.startswith('assets/'): continue
+        local=root/source
+        if local.is_file():
+            width,height=image_size(str(local))
+            image['width']=str(width);image['height']=str(height)
     return str(soup)

@@ -172,7 +172,11 @@
     form.addEventListener('submit', e => {
       e.preventDefault();
       const url = 'https://wa.me/34604207678?text=' + encodeURIComponent(compose());
-      status.textContent = T('Abriendo WhatsApp con tu mensaje preparado… tú decides si lo envías.', 'Abrindo WhatsApp coa túa mensaxe preparada… ti decides se a envías.');
+      status.replaceChildren(document.createTextNode(T('Tu consulta está preparada. ', 'A túa consulta está preparada. ')));
+      const fallback = document.createElement('a');
+      fallback.href = url; fallback.target = '_blank'; fallback.rel = 'noopener';
+      fallback.textContent = T('Abrir el mensaje en WhatsApp', 'Abrir a mensaxe en WhatsApp');
+      status.append(fallback);
       open(url, '_blank', 'noopener');
     });
     const cp = $('[data-copy]', form);

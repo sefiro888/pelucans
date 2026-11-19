@@ -43,3 +43,13 @@ La parte de implementación del muro está terminada; su activación real depend
 - [x] Usar exclusivamente fotos reales de Pelucans en las cabeceras.
 - [x] Retirar el panel de pestañas y la huella de los pasos; sustituirlo por fotografía real y momentos desplegables.
 - [x] Verificar las 20 páginas en ordenador y móvil.
+
+## Revisión móvil del 19/11/2026
+- Corregido el desbordamiento del nombre de Instagram a 320 px y el menú de tablet a 1024 px; navegación compacta hasta 1100 px.
+- Reels con desplazamiento horizontal y ajuste por tarjeta en móvil; controles nativos accesibles incluso sin JavaScript, sin interfaz de Instagram.
+- Campos de 16 px, botones táctiles amplios, margen para la barra fija y zonas seguras del dispositivo.
+- Menú con cierre mediante Escape, foco contenido y fondo inactivo mientras está abierto.
+- Consulta de WhatsApp con enlace alternativo y validación de nombres vacíos; preparación probada sin enviar mensajes.
+- Dimensiones reales en las imágenes para reducir saltos de contenido durante la carga.
+- Revisión en navegador: 40 páginas ES/GL a 320 px, más portada, contacto, servicios y galería a 390/768/1024/1440 px. Detectados y corregidos los dos desbordamientos indicados.
+- La prueba es de navegador con tamaños de pantalla; no equivale a una prueba física en iPhone y Android.
