@@ -2,6 +2,7 @@
 from bs4 import BeautifulSoup
 from html import escape
 from pathlib import Path
+import json
 
 GUIDES = {
  'corte-tijera': ('Un acabado bonito que puedas mantener',
@@ -124,7 +125,19 @@ def panorama(body, file, photo, services, wa):
     if (asset_root/desktop).is_file(): sources+=f'<source media="(min-width: 801px)" srcset="{desktop}">'
     if (asset_root/mobile).is_file(): sources+=f'<source media="(max-width: 800px)" srcset="{mobile}">'
     photo_markup=f'<picture>{sources}<img class="panorama-image" src="{image_src}" alt="" fetchpriority="high" decoding="async"></picture>'
-    header = f'''<header class="page-hero cinematic-hero {'cinematic-home' if file=='index.html' else ''}" style="--hero-pos:{pos}">{photo_markup}<div class="panorama-shade"></div><div class="wrap panorama-content">{str(crumbs) if crumbs else ''}<div class="panorama-copy"><span class="eyebrow">{eyebrow.decode_contents() if eyebrow else 'Pelucans · A Laracha'}</span><h1>{title}</h1><p class="lead">{summary}</p>{actions}</div><div class="panorama-foot"><span>PELUCANS · A LARACHA</span><span>Atención individual · Cita previa</span></div></div></header>'''
+    restored_class=''
+    mobile_pos=pos
+    manifest_path=asset_root/'assets/img/headers/manifest.json'
+    manifest=json.loads(manifest_path.read_text(encoding='utf-8')) if manifest_path.exists() else {}
+    if source in manifest:
+        entry=manifest[source]
+        candidates=', '.join(f"{item['src']} {item['width']}w" for item in entry['variants'])
+        mobile_image=entry['mobile']
+        fallback=entry['variants'][1]['src']
+        photo_markup=f'<picture><source media="(max-width: 800px)" srcset="{mobile_image["src"]} {mobile_image["width"]}w" sizes="100vw" width="{mobile_image["width"]}" height="{mobile_image["height"]}"><img class="panorama-image" src="{fallback}" srcset="{candidates}" sizes="100vw" alt="" fetchpriority="high" decoding="async"></picture>'
+        pos='center top'
+        restored_class='restored-dog-hero'
+    header = f'''<header class="page-hero cinematic-hero {restored_class} {'cinematic-home' if file=='index.html' else ''}" style="--hero-pos:{pos};--hero-pos-mobile:{mobile_pos}">{photo_markup}<div class="panorama-shade"></div><div class="wrap panorama-content">{str(crumbs) if crumbs else ''}<div class="panorama-copy"><span class="eyebrow">{eyebrow.decode_contents() if eyebrow else 'Pelucans · A Laracha'}</span><h1>{title}</h1><p class="lead">{summary}</p>{actions}</div><div class="panorama-foot"><span>PELUCANS · A LARACHA</span><span>Atención individual · Cita previa</span></div></div></header>'''
     rest = body[end + 10:]
     if specific:
         # La guía se sitúa antes de las preguntas, sin duplicar la explicación inicial.

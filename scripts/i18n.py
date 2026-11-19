@@ -79,6 +79,8 @@ def to_galician(html, file):
     h = h.replace(f'<link rel="alternate" hreflang="es" href="{file}"><link rel="alternate" hreflang="gl" href="gl/{file}">',
                   f'<link rel="alternate" hreflang="es" href="../{file}"><link rel="alternate" hreflang="gl" href="{file}">')
     h = h.replace('<script src="../assets/js/site.js" defer>', "<script>window.PEL_ROOT='../'</script><script src=\"../assets/js/site.js\" defer>", 1)
+    # Cada candidato del srcset necesita su ruta relativa desde /gl/.
+    h = re.sub(r'srcset="([^"]+)"', lambda m: 'srcset="'+', '.join(('../'+v.strip() if v.strip().startswith('assets/') else v.strip()) for v in m.group(1).split(','))+'"', h)
     h = h.replace('<head>', "<head><script>window.PEL_ROOT='../'</script>", 1)
     return h
 

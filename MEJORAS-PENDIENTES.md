@@ -66,3 +66,11 @@ Comprobación pública: 40 páginas y 101 recursos devuelven HTTP 200. MP4 públ
 - [x] Contenidos ES/GL y revisión de 60 combinaciones de las seis páginas nuevas o ampliadas, en 320/390/768/1100/1440 px. Sin desbordamientos ni solapamientos de cabecera. Calendario probado en las cuatro estaciones, flechas, Home y End; mitos abiertos en móvil.
 - [x] 1, preparación: soporte de fotos de cabecera específicas para ordenador y móvil. Sin modificar las fotos reales mediante IA.
 - [ ] 1, fotografía nueva: pendiente una sesión real de tomas horizontales hechas expresamente. Pautas de encuadre y nombres de archivo en README.md. No se afirma que se hayan tomado fotos nuevas.
+
+## Restauración de fotos de perros · 20/11/2026
+- [x] Retocar exclusivamente cinco fotos de perros solos, con siete restauraciones (cinco panorámicas y dos verticales).
+- [x] Mantener intactas todas las fotos con personas y las fotos originales de resultados.
+- [x] Exportaciones WebP hasta 3840 × 2160 px, identificadas como reescaladas, no 4K nativo.
+- [x] Selección automática por pantalla y rutas ES/GL de los srcset.
+- [x] Ajustar las variantes móviles para evitar recortar las orejas.
+- [x] Comprobadas 96 vistas con anchura efectiva verificada: 320/390/800/801/1440/3840 px en ES/GL. Todas las vistas 4K seleccionan la variante de 3840 px y las móviles, la vertical.

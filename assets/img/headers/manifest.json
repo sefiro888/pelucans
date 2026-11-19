@@ -1,0 +1,187 @@
+{
+  "cliente-80": {
+    "restoration": "AI restoration and extended background, dogs only",
+    "nativeRestorationSize": [
+      1672,
+      941
+    ],
+    "originalSource": "raw_ig/hl-clientes-80.jpg",
+    "variants": [
+      {
+        "src": "assets/img/headers/cliente-80-restored-1280.webp",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "assets/img/headers/cliente-80-restored-1920.webp",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "src": "assets/img/headers/cliente-80-restored-2560.webp",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "src": "assets/img/headers/cliente-80-restored-3840.webp",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "mobile": {
+      "src": "assets/img/headers/cliente-80-mobile-original.webp",
+      "width": 720,
+      "height": 1280,
+      "restored": false
+    },
+    "uhdExport": "resampled, not native 4K"
+  },
+  "cliente-16": {
+    "restoration": "AI restoration and extended background, dogs only",
+    "nativeRestorationSize": [
+      1672,
+      941
+    ],
+    "originalSource": "raw_ig/hl-clientes-16.jpg",
+    "variants": [
+      {
+        "src": "assets/img/headers/cliente-16-restored-1280.webp",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "assets/img/headers/cliente-16-restored-1920.webp",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "src": "assets/img/headers/cliente-16-restored-2560.webp",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "src": "assets/img/headers/cliente-16-restored-3840.webp",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "mobile": {
+      "src": "assets/img/headers/cliente-16-mobile-original.webp",
+      "width": 720,
+      "height": 1280,
+      "restored": false
+    },
+    "uhdExport": "resampled, not native 4K"
+  },
+  "cliente-20": {
+    "restoration": "AI restoration and extended background, dogs only",
+    "nativeRestorationSize": [
+      1672,
+      941
+    ],
+    "originalSource": "raw_ig/hl-clientes-20.jpg",
+    "variants": [
+      {
+        "src": "assets/img/headers/cliente-20-restored-1280.webp",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "assets/img/headers/cliente-20-restored-1920.webp",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "src": "assets/img/headers/cliente-20-restored-2560.webp",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "src": "assets/img/headers/cliente-20-restored-3840.webp",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "mobile": {
+      "src": "assets/img/headers/cliente-20-mobile-restored.webp",
+      "width": 941,
+      "height": 1672,
+      "restored": true
+    },
+    "uhdExport": "resampled, not native 4K"
+  },
+  "cliente-41": {
+    "restoration": "AI restoration and extended background, dogs only",
+    "nativeRestorationSize": [
+      1672,
+      941
+    ],
+    "originalSource": "raw_ig/hl-clientes-41.jpg",
+    "variants": [
+      {
+        "src": "assets/img/headers/cliente-41-restored-1280.webp",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "assets/img/headers/cliente-41-restored-1920.webp",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "src": "assets/img/headers/cliente-41-restored-2560.webp",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "src": "assets/img/headers/cliente-41-restored-3840.webp",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "mobile": {
+      "src": "assets/img/headers/cliente-41-mobile-restored.webp",
+      "width": 941,
+      "height": 1672,
+      "restored": true
+    },
+    "uhdExport": "resampled, not native 4K"
+  },
+  "cliente-46": {
+    "restoration": "AI restoration and extended background, dogs only",
+    "nativeRestorationSize": [
+      1672,
+      941
+    ],
+    "originalSource": "raw_ig/hl-clientes-46.jpg",
+    "variants": [
+      {
+        "src": "assets/img/headers/cliente-46-restored-1280.webp",
+        "width": 1280,
+        "height": 720
+      },
+      {
+        "src": "assets/img/headers/cliente-46-restored-1920.webp",
+        "width": 1920,
+        "height": 1080
+      },
+      {
+        "src": "assets/img/headers/cliente-46-restored-2560.webp",
+        "width": 2560,
+        "height": 1440
+      },
+      {
+        "src": "assets/img/headers/cliente-46-restored-3840.webp",
+        "width": 3840,
+        "height": 2160
+      }
+    ],
+    "mobile": {
+      "src": "assets/img/headers/cliente-46-mobile-original.webp",
+      "width": 720,
+      "height": 1280,
+      "restored": false
+    },
+    "uhdExport": "resampled, not native 4K"
+  }
+}

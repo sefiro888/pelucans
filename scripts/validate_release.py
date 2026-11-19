@@ -14,17 +14,18 @@ for page in pages:
     if page.parent.name=='gl' and soup.html.get('lang')!='gl':issues.append(f'{page}: idioma incorrecto')
     for node in soup.select('[src],[href],[poster],[srcset]'):
         for attr in ('src','href','poster','srcset'):
-            raw=node.get(attr)
-            if not raw:continue
-            url=urlsplit(raw)
-            if url.scheme or url.netloc:continue
-            if not url.path:
-                if url.fragment and not soup.find(id=unquote(url.fragment)):issues.append(f'{page.name}: ancla {raw}')
-                continue
-            target=(page.parent/unquote(url.path)).resolve()
-            if not target.exists():issues.append(f'{page}: recurso ausente {raw}');continue
-            rel=target.relative_to(ROOT).as_posix()
-            if rel not in tracked:issues.append(f'{page.name}: recurso no incluido en Git {rel}')
+            value=node.get(attr)
+            if not value:continue
+            for raw in ([part.strip().split()[0] for part in value.split(',')] if attr=='srcset' else [value]):
+                url=urlsplit(raw)
+                if url.scheme or url.netloc:continue
+                if not url.path:
+                    if url.fragment and not soup.find(id=unquote(url.fragment)):issues.append(f'{page.name}: ancla {raw}')
+                    continue
+                target=(page.parent/unquote(url.path)).resolve()
+                if not target.exists():issues.append(f'{page}: recurso ausente {raw}');continue
+                rel=target.relative_to(ROOT).as_posix()
+                if rel not in tracked:issues.append(f'{page.name}: recurso no incluido en Git {rel}')
     if page.name.startswith('servicio-'):
         if not soup.select_one('video.native-film source'):issues.append(f'{page.name}: falta MP4')
         if not soup.select_one('#guia'):issues.append(f'{page.name}: falta guía específica')
