@@ -124,3 +124,10 @@ Todas las páginas incluyen la URL HTTPS absoluta de la imagen, su formato y dim
 Regenerar tarjetas: `python scripts/prepare_social.py` (requiere CairoSVG y las fuentes Georgia/Arial disponibles en el sistema). Regenerar HTML: `python build.py`. Validación: `python scripts/validate_release.py` comprueba también las etiquetas de vista previa y la inclusión de las imágenes en Git. Se comprueban formato, dimensiones y tamaño de ambas tarjetas por separado.
 
 Referencias: https://ogp.me/ y https://developers.facebook.com/documentation/sharing/webmasters/images. La presentación exacta y el contenido guardado anteriormente dependen de la aplicación que genera la vista previa; no se ha enviado ningún mensaje de prueba al cliente.
+
+## Selector de colores para elegir el estilo
+Se reincorpora el botón «Colores» al nuevo menú: Logo (negro/blanco/grises), Original (rosa/mantequilla), Mar (azul/coral), Bosque (verde/terracota) y Lila (violeta/melocotón). La selección cambia el estilo al momento y se guarda únicamente en ese navegador mediante la preferencia ya existente; también se recupera al abrir otra página. El estilo inicial para visitantes nuevos sigue siendo Logo.
+
+El selector funciona en claro y oscuro. En móvil se abre desde el menú y, después de elegir, cierra el menú para mostrar la página con el nuevo color. Las escenas de los pasos toman un fondo oscuro acorde con cada paleta y mantienen el texto claro. Se conservan la selección de idioma, el contenido y las fotos.
+
+Verificados cinco estilos en cada modo, persistencia entre páginas, navegación de opciones con teclado, Escape y selección móvil con liberación del fondo. Comprobados ocho anchos de 320 a 1920 px sin desbordamiento. Las miniaturas para compartir siguen siendo las tarjetas de marca publicadas, independientes de la preferencia de color local.

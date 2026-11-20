@@ -35,6 +35,7 @@
   menu?.addEventListener('click',event=>{if(mobile.matches&&event.target.closest('a[href]'))closeMenu();});
   mobile.addEventListener('change',()=>{if(!mobile.matches)closeMenu();else synchronizeMenu();});
   synchronizeMenu();
+  document.addEventListener('pelucans:palette',()=>{if(mobile.matches)closeMenu(true);});
   document.addEventListener('keydown',event=>{
     if(!mobile.matches||!menu?.classList.contains('open'))return;
     if(event.key==='Escape'){event.preventDefault();closeMenu(true);return;}

@@ -17,8 +17,20 @@ def signature_nav(markup):
     nav=soup.select_one('header.nav')
     if not nav:return markup
     nav['class']=nav.get('class',[])+['signature-nav']
-    for node in nav.select('.pal,.open-pill'):node.decompose()
+    for node in nav.select('.open-pill'):node.decompose()
     for node in nav.select('.nav-links>a:not(.btn),.nav-drop>a'):node['class']=node.get('class',[])+['nav-link']
+    pal=nav.select_one('.pal')
+    if pal:
+        control=pal.select_one('.pal-toggle');popup=pal.select_one('.pal-pop')
+        control['aria-label']='Cambiar colores de la web';control['title']='Probar colores';control['aria-controls']='palette-menu';control['aria-haspopup']='menu'
+        control.clear();control.append(BeautifulSoup('<svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.35"><path d="M12 3a9 9 0 1 0 0 18h1c2 0 3-2 2-3-1-2 0-3 2-3h1a4 4 0 0 0 4-4c0-5-5-8-10-8Z"/><circle cx="7" cy="11" r="1" fill="currentColor"/><circle cx="10" cy="7" r="1" fill="currentColor"/><circle cx="15" cy="7" r="1" fill="currentColor"/></svg><span>Colores</span>','html.parser'))
+        popup['id']='palette-menu'
+        title=BeautifulSoup('<span class="pal-heading" role="presentation">Colores para tu web<small>Prueba, compara y elige.</small></span>','html.parser')
+        popup.insert(0,title)
+        options=list(popup.select('[data-pal]'))
+        for option in options:option['role']='menuitemradio';option['aria-checked']='false'
+        logo=popup.select_one('[data-pal="logo"]')
+        if logo:logo.extract();popup.insert(1,logo)
     theme=nav.select_one('.theme-toggle')
     if theme:theme.clear();theme.append(BeautifulSoup(SUN+MOON,'html.parser'))
     toggle=nav.select_one('.menu-toggle')

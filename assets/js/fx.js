@@ -64,15 +64,35 @@
   /* ----- selector de paletas de color ----- */
   const pal = $('.pal');
   if (pal) {
-    const tg = $('.pal-toggle', pal), items = $$('[data-pal]', pal);
+    const tg = $('.pal-toggle', pal), popup=$('.pal-pop',pal), items = $$('[data-pal]', pal);
     const cur = () => root.dataset.palette || 'original';
     const mark = () => items.forEach(b => b.setAttribute('aria-checked', String(b.dataset.pal === cur())));
+    const closePalette=(focus=false)=>{pal.classList.remove('open');tg.setAttribute('aria-expanded','false');popup.inert=true;if(focus)tg.focus();};
     const apply = p => { if (p === 'original') delete root.dataset.palette; else root.dataset.palette = p; try { localStorage.setItem('pel-palette', p); } catch (_) {} mark(); };
-    mark();
-    tg.addEventListener('click', e => { e.stopPropagation(); const o = pal.classList.toggle('open'); tg.setAttribute('aria-expanded', String(o)); });
-    items.forEach(b => b.addEventListener('click', () => { apply(b.dataset.pal); pal.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); }));
-    document.addEventListener('click', e => { if (!pal.contains(e.target)) { pal.classList.remove('open'); tg.setAttribute('aria-expanded', 'false'); } });
-    document.addEventListener('keydown', e => { if (e.key === 'Escape') pal.classList.remove('open'); });
+    mark();popup.inert=true;
+    tg.addEventListener('click', e => {
+      e.stopPropagation();
+      if(pal.classList.contains('open')){closePalette(true);return;}
+      $$('.nav-drop.open').forEach(drop=>{drop.classList.remove('open');$('button',drop)?.setAttribute('aria-expanded','false');});
+      pal.classList.add('open');popup.inert=false;tg.setAttribute('aria-expanded','true');
+      (items.find(item=>item.getAttribute('aria-checked')==='true')||items[0]).focus();
+    });
+    items.forEach(b => b.addEventListener('click', () => {
+      apply(b.dataset.pal);closePalette(true);
+      document.dispatchEvent(new CustomEvent('pelucans:palette',{detail:b.dataset.pal}));
+    }));
+    pal.addEventListener('keydown',event=>{
+      if(!pal.classList.contains('open'))return;
+      if(event.key==='Escape'){event.preventDefault();event.stopPropagation();closePalette(true);return;}
+      let i=items.indexOf(document.activeElement),next=i;
+      if(event.key==='ArrowDown')next=(i+1)%items.length;
+      else if(event.key==='ArrowUp')next=(i+items.length-1)%items.length;
+      else if(event.key==='Home')next=0;
+      else if(event.key==='End')next=items.length-1;
+      else return;
+      event.preventDefault();items[next].focus();
+    });
+    document.addEventListener('click', e => { if (!pal.contains(e.target)) closePalette(); });
   }
 
   /* ----- test: ¿qué necesita mi perro? ----- */

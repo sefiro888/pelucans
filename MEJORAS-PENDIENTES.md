@@ -88,3 +88,10 @@ Comprobación pública: 40 páginas y 101 recursos devuelven HTTP 200. MP4 públ
 - [x] Título y descripción específicos para compartir la portada.
 - [x] Metadatos sociales completos en las 44 páginas, con URLs públicas absolutas.
 - [x] Formato JPEG ligero y dimensiones declaradas; validación de recursos incluidos en Git.
+
+## Recuperar selector de colores · 20/11/2026
+- [x] Botón Colores integrado en el nuevo menú de las 44 páginas ES/GL.
+- [x] Cinco paletas y compatibilidad con modo claro/oscuro.
+- [x] Selección recordada entre páginas en el mismo navegador.
+- [x] Selección móvil con vista directa del resultado y controles de teclado.
+- [x] Pruebas de diez combinaciones de paleta/modo y ocho anchos, sin desbordamiento.
