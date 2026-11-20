@@ -19,6 +19,8 @@
     const opened=mobile.matches&&menu.classList.contains('open');
     menuToggle.setAttribute('aria-expanded',String(opened));
     menuToggle.setAttribute('aria-label',opened?t('Cerrar menú','Pechar menú'):t('Abrir menú','Abrir menú'));
+    menuToggle.innerHTML='<span>'+ (opened?t('Cerrar','Pechar'):t('Menú','Menú')) +'</span><svg viewBox="0 0 28 20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4"><path d="'+(opened?'M5 2l18 16M5 18 23 2':'M1 5h26M8 15h19')+'"/></svg>';
+    menu.inert=mobile.matches&&!opened;
     outside.forEach(el=>{el.inert=opened;});
     document.body.style.overflow=opened?'hidden':'';
     menuOffset();
@@ -31,7 +33,8 @@
   }
   menuToggle?.addEventListener('click',synchronizeMenu);
   menu?.addEventListener('click',event=>{if(mobile.matches&&event.target.closest('a[href]'))closeMenu();});
-  mobile.addEventListener('change',()=>{if(!mobile.matches)closeMenu();});
+  mobile.addEventListener('change',()=>{if(!mobile.matches)closeMenu();else synchronizeMenu();});
+  synchronizeMenu();
   document.addEventListener('keydown',event=>{
     if(!mobile.matches||!menu?.classList.contains('open'))return;
     if(event.key==='Escape'){event.preventDefault();closeMenu(true);return;}

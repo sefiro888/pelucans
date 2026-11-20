@@ -81,6 +81,9 @@ def to_galician(html, file):
     h = h.replace('<script src="../assets/js/site.js" defer>', "<script>window.PEL_ROOT='../'</script><script src=\"../assets/js/site.js\" defer>", 1)
     # Cada candidato del srcset necesita su ruta relativa desde /gl/.
     h = re.sub(r'srcset="([^"]+)"', lambda m: 'srcset="'+', '.join(('../'+v.strip() if v.strip().startswith('assets/') else v.strip()) for v in m.group(1).split(','))+'"', h)
+    # El parser de la navegación ordena atributos: reconstruir el selector por clase.
+    language_switch=f'<span class="lang-switch" role="group" aria-label="Idioma"><a href="../{file}" lang="es" hreflang="es">ES</a><a href="{file}" lang="gl" hreflang="gl" aria-current="true">GL</a></span>'
+    h=re.sub(r'<span\b(?=[^>]*\bclass="lang-switch")[^>]*>.*?</span>',lambda m:language_switch,h,flags=re.S)
     h = h.replace('<head>', "<head><script>window.PEL_ROOT='../'</script>", 1)
     return h
 

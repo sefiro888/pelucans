@@ -74,3 +74,11 @@ Comprobación pública: 40 páginas y 101 recursos devuelven HTTP 200. MP4 públ
 - [x] Selección automática por pantalla y rutas ES/GL de los srcset.
 - [x] Ajustar las variantes móviles para evitar recortar las orejas.
 - [x] Comprobadas 96 vistas con anchura efectiva verificada: 320/390/800/801/1440/3840 px en ES/GL. Todas las vistas 4K seleccionan la variante de 3840 px y las móviles, la vertical.
+
+## Rediseño pedido en las capturas · 20/11/2026
+- [x] Reemplazar los pasos de una línea por 36 capítulos específicos y detallados, en los nueve servicios ES/GL.
+- [x] Presentación propia con contraste negro/blanco, fotografías y navegación entre momentos.
+- [x] Foto y contador que siguen la lectura en ordenador; foto en cada capítulo en móvil.
+- [x] Renovar menú de ordenador, desplegable de servicios y menú móvil.
+- [x] Sustituir la huella de transición por el logo real con anillos y apertura de telón.
+- [x] Verificar 148 vistas y controles; mantener las fotos con personas sin retocar.

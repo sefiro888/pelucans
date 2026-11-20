@@ -27,6 +27,10 @@ for page in pages:
                 rel=target.relative_to(ROOT).as_posix()
                 if rel not in tracked:issues.append(f'{page.name}: recurso no incluido en Git {rel}')
     if page.name.startswith('servicio-'):
+        chapters=soup.select('.journey-chapter')
+        if len(chapters)!=4:issues.append(f'{page.name}: faltan capítulos de cuidado')
+        for chapter in chapters:
+            if len(chapter.get_text(' ',strip=True).split())<35:issues.append(f'{page.name}: capítulo sin desarrollo suficiente')
         if not soup.select_one('video.native-film source'):issues.append(f'{page.name}: falta MP4')
         if not soup.select_one('#guia'):issues.append(f'{page.name}: falta guía específica')
 if issues:

@@ -4,6 +4,7 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => [...c.querySelectorAll(s)];
   const root = document.documentElement;
+  clearTimeout(window.PEL_TRANSITION_FALLBACK);
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const fine = matchMedia('(hover:hover) and (pointer:fine)').matches;
   const GL = root.lang === 'gl';
@@ -21,13 +22,17 @@
   markLoaded(); addEventListener('load', markLoaded);
 
   /* ----- 6 · transición entre páginas ----- */
-  addEventListener('pageshow', () => root.classList.remove('pt-on'));
-  requestAnimationFrame(() => setTimeout(() => root.classList.remove('pt-on'), 60));
+
+  requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(() => root.classList.remove('pt-on'), 170)));
+  addEventListener('pageshow', event => { if(event.persisted)root.classList.remove('pt-on'); });
   if (!reduce) document.addEventListener('click', e => {
     const a = e.target.closest('a[href]'); if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank' || a.hasAttribute('download')) return;
     const u = new URL(a.href, location.href); if (u.origin !== location.origin || !/\.html?$|\/$/.test(u.pathname)) return;
     if (u.pathname === location.pathname && (u.hash || !u.search)) return;
-    e.preventDefault(); root.classList.add('pt-on'); setTimeout(() => { location.href = a.href; }, 380);
+    e.preventDefault();
+    const destination=document.querySelector('.pt-destination');
+    if(destination)destination.textContent=(a.querySelector('h3,b')?.textContent||a.textContent).trim().replace(/\s+/g,' ').slice(0,64);
+    root.classList.add('pt-on'); setTimeout(() => { location.href = a.href; }, 780);
   });
 
   /* ----- 3 · servicios con foto fija ----- */
