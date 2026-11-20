@@ -115,3 +115,12 @@ Comprobación de esta publicación: 96 combinaciones de las ocho páginas afecta
 - Sello de transición derivado del logotipo real, con recorte circular y anillos; se retira la huella dibujada de la transición. Telón de dos hojas, nombre del destino y apertura en la página siguiente. Se respeta movimiento reducido, enlaces externos, descargas y teclas modificadoras. Un límite de seguridad evita dejar la página tapada si el script de efectos no llega a cargarse.
 - Contenido y menús ES/GL sin traducciones pendientes. 148 comprobaciones de diseño con anchura efectiva verificada: todas las 44 páginas a 320 y 1101 px; portada y nueve servicios en ambos idiomas a 390, 768 y 1440 px. Sin desbordamiento, cabeceras encajadas y cuatro capítulos presentes en todas las fichas.
 - Comprobados el desplegable de servicios, el menú móvil con Escape, la transición real entre páginas y la correspondencia entre capítulo, foto y contador. Pruebas en navegador, no en dispositivos físicos.
+
+## Vista previa al compartir enlaces
+Se han añadido tarjetas JPEG de 1200 × 630 px y unos 112 KB para compartir por WhatsApp y otras aplicaciones. Se utiliza una composición vectorial con el logo original y la imagen de perro ya existente; no se retocan fotos con personas. La tarjeta de inicio lleva el título «Pelucans · Amor y cuidado para tu perro» y una descripción breve de los cuidados y la atención del salón. Hay una variante en gallego.
+
+Todas las páginas incluyen la URL HTTPS absoluta de la imagen, su formato y dimensiones, texto alternativo, nombre del sitio y metadatos Open Graph y Twitter Card. Las páginas interiores conservan sus títulos y descripciones específicos. La información está directamente en el HTML y no depende de JavaScript. El archivo de imagen tiene un nombre versionado para futuras actualizaciones sin sobrescribir imágenes que ya se hayan compartido.
+
+Regenerar tarjetas: `python scripts/prepare_social.py` (requiere CairoSVG y las fuentes Georgia/Arial disponibles en el sistema). Regenerar HTML: `python build.py`. Validación: `python scripts/validate_release.py` comprueba también las etiquetas de vista previa y la inclusión de las imágenes en Git. Se comprueban formato, dimensiones y tamaño de ambas tarjetas por separado.
+
+Referencias: https://ogp.me/ y https://developers.facebook.com/documentation/sharing/webmasters/images. La presentación exacta y el contenido guardado anteriormente dependen de la aplicación que genera la vista previa; no se ha enviado ningún mensaje de prueba al cliente.

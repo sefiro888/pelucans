@@ -82,3 +82,9 @@ Comprobación pública: 40 páginas y 101 recursos devuelven HTTP 200. MP4 públ
 - [x] Renovar menú de ordenador, desplegable de servicios y menú móvil.
 - [x] Sustituir la huella de transición por el logo real con anillos y apertura de telón.
 - [x] Verificar 148 vistas y controles; mantener las fotos con personas sin retocar.
+
+## Miniatura y descripción al compartir · 20/11/2026
+- [x] Tarjeta de marca 1200 × 630 px con logo, perro y lema, en español y gallego.
+- [x] Título y descripción específicos para compartir la portada.
+- [x] Metadatos sociales completos en las 44 páginas, con URLs públicas absolutas.
+- [x] Formato JPEG ligero y dimensiones declaradas; validación de recursos incluidos en Git.

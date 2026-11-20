@@ -63,11 +63,13 @@ def to_galician(html, file):
         part = re.sub(r'>([^<>]+)<', lambda m: '>' + tr(m.group(1)) + '<', part)
         # atributos traducibles
         part = re.sub(r'\b(alt|title|aria-label|placeholder)="([^"]*)"', lambda m: f'{m.group(1)}="{tr(m.group(2), True)}"', part)
-        part = re.sub(r'(<meta (?:name="description"|property="og:(?:title|description)") content=")([^"]*)(")', lambda m: m.group(1) + tr(m.group(2), True) + m.group(3), part)
+        part = re.sub(r'(<meta (?:name="(?:description|twitter:(?:title|description|image:alt))"|property="og:(?:title|description|image:alt)") content=")([^"]*)(")', lambda m: m.group(1) + tr(m.group(2), True) + m.group(3), part)
         out.append(part)
     h = ''.join(out)
     # 2) idioma y rutas
     h = h.replace('<html lang="es"', '<html lang="gl"', 1)
+    h=h.replace('property="og:locale" content="es_ES"','property="og:locale" content="gl_ES"').replace('property="og:locale:alternate" content="gl_ES"','property="og:locale:alternate" content="es_ES"')
+    h=h.replace('assets/social/pelucans-compartir-v1.jpg','assets/social/pelucans-compartir-gl-v1.jpg')
     # datos estructurados: solo el LocalBusiness (el resto está en castellano)
     h = re.sub(r'<script type="application/ld\+json">(?:(?!</script>).)*?"@type": "(?:FAQPage|Service|Article|BreadcrumbList)"(?:(?!</script>).)*?</script>', '', h, flags=re.S)
     h = h.replace('href="site.webmanifest"', 'href="../site.webmanifest"')

@@ -12,6 +12,19 @@ for page in pages:
     if len(soup.select('h1'))!=1:issues.append(f'{page.name}: H1 incorrecto')
     if len(soup.select('main>header.page-hero'))!=1:issues.append(f'{page.name}: falta cabecera panorámica')
     if page.parent.name=='gl' and soup.html.get('lang')!='gl':issues.append(f'{page}: idioma incorrecto')
+    image=soup.select_one('meta[property="og:image"]')
+    if not image or not image.get('content','').startswith('https://'):issues.append(f'{page}: imagen social sin URL HTTPS absoluta')
+    else:
+        expected='pelucans-compartir-gl-v1.jpg' if page.parent.name=='gl' else 'pelucans-compartir-v1.jpg'
+        if not image['content'].endswith('/assets/social/'+expected):issues.append(f'{page}: imagen social del idioma incorrecta')
+        target=ROOT/'assets/social'/expected
+        if not target.exists() or target.relative_to(ROOT).as_posix() not in tracked:issues.append(f'{page}: tarjeta social no publicada en Git')
+    for name in ('og:title','og:description','og:image:alt','og:image:width','og:image:height'):
+        meta=soup.select_one(f'meta[property="{name}"]')
+        if not meta or not meta.get('content'):issues.append(f'{page}: falta {name}')
+    for key,value in [('og:image:width','1200'),('og:image:height','630'),('og:image:type','image/jpeg')]:
+        meta=soup.select_one(f'meta[property="{key}"]')
+        if not meta or meta.get('content')!=value:issues.append(f'{page}: {key} incorrecto')
     for node in soup.select('[src],[href],[poster],[srcset]'):
         for attr in ('src','href','poster','srcset'):
             value=node.get(attr)
